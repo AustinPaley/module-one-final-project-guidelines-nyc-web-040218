@@ -106,10 +106,11 @@ end
 # puts spell_info
 
 def create_new_spell
-  spell_info.each do |spell_val|
+  spell_info.map do |spell_val|
 
   Spell.create(
     name: spell_val["name"],
+    description: spell_val["desc"]
   )
 
   end

@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 20180417145320) do
 
   create_table "spells", force: :cascade do |t|
     t.string "name"
+    t.string "description"
   end
 
 end

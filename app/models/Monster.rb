@@ -3,15 +3,10 @@ class Monster < ActiveRecord::Base
   has_many :languages
 
 
-
-
-
-
-
 # NOT SURE WHAT monster_key (the hash) is actually called
   def self.of_this_size(size)
     Monster.all.select do |mon|
-      mon[:size] == size
+      mon[:size].downcase == size.downcase
     end #or use SELECT?
   end
 
@@ -52,8 +47,80 @@ class Monster < ActiveRecord::Base
     self.hit_points
   end
 
-  # def abilities
-  # end
+  def cleaned_action_data
+    Monster.all.map do |monster_object|
+      almost_cleaned = monster_object.actions.gsub(/[\[\]\\"]/, "")
+      cleaned = almost_cleaned[1..-2]
+      binding.pry
+      cleaned
+    end
+  end
+
+  def self.generate_very_easy_monsters(number_of_monsters=0)
+    if number_of_monsters == 0
+      puts "Please enter how many monsters you would like."
+    else
+      very_easy_monsters = Monster.all.select do |monster_obj|
+        monster_obj.challenge_rating < 1
+      end
+      very_easy_monsters.sample(number_of_monsters)
+    end
+  end
+
+  def self.generate_easy_monsters(number_of_monsters=0)
+    if number_of_monsters == 0
+      puts "Please enter how many monsters you would like."
+    else
+      easy_monsters = Monster.all.select do |monster_obj|
+        monster_obj.challenge_rating < 3
+      end
+      easy_monsters.sample(number_of_monsters)
+    end
+  end
+
+  def self.generate_medium_monsters(number_of_monsters=0)
+    if number_of_monsters == 0
+      puts "Please enter how many monsters you would like."
+    else
+      medium_monsters = Monster.all.select do |monster_obj|
+        monster_obj.challenge_rating > 3 && monster_obj.challenge_rating < 7
+      end
+      medium_monsters.sample(number_of_monsters)
+    end
+  end
+
+  def self.generate_hard_monsters(number_of_monsters=0)
+    if number_of_monsters == 0
+      puts "Please enter how many monsters you would like."
+    else
+      hard_monsters = Monster.all.select do |monster_obj|
+        monster_obj.challenge_rating > 7 && monster_obj.challenge_rating < 10
+      end
+      hard_monsters.sample(number_of_monsters)
+    end
+  end
+
+  def self.generate_very_hard_monsters(number_of_monsters=0)
+    if number_of_monsters == 0
+      puts "Please enter how many monsters you would like."
+    else
+      very_hard_monsters = Monster.all.select do |monster_obj|
+        monster_obj.challenge_rating > 10 && monster_obj.challenge_rating < 20
+      end
+      very_hard_monsters.sample(number_of_monsters)
+    end
+  end
+
+  def self.generate_impossible_monsters(number_of_monsters=0)
+    if number_of_monsters == 0
+      puts "Please enter how many monsters you would like."
+    else
+      impossible_monsters = Monster.all.select do |monster_obj|
+        monster_obj.challenge_rating > 20 && monster_obj.challenge_rating < 30
+      end
+      impossible_monsters.sample(number_of_monsters)
+    end
+  end
 
 end
 
