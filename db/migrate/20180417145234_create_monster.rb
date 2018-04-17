@@ -5,7 +5,7 @@ class CreateMonster < ActiveRecord::Migration[5.0]
       t.string :size
       t.string :type
       t.integer :hit_points
-      t.integer :action_id
+      t.integer :spell_id
       t.integer :language_id
     end
   end
