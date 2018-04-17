@@ -32,12 +32,11 @@ def create_new_monster
 
     Monster.create(
     name: monster_key,
-    hp: monster_val["hit_points"],
+    hit_points: monster_val["hit_points"],
     size: monster_val["size"],
     actions: monster_val["actions"],
     challenge_rating: monster_val["challenge_rating"],
     speed: monster_val["speed"],
-    languages: monster_val["languages"]
     )
 
   end
@@ -68,14 +67,12 @@ def language_info
   language_info_hash
 end
 
-
 def create_new_language
   language_info.each do |language_key, language_val|
 
   Language.create(
   name: language_key,
-  type: language_val["type"]
-  # typical_speakers: language_val["typical_speakers"]
+  language_type: language_val["type"]
   )
 
   end
@@ -85,14 +82,14 @@ end
 
 ###SPELLS DATA###
 def spells_parsing
-all_spells_data = RestClient.get("http://www.dnd5eapi.co/api/spells")
-parsed_spells_data = JSON.parse(all_spells_data)
-parsed_spells_data
+  all_spells_data = RestClient.get("http://www.dnd5eapi.co/api/spells")
+  parsed_spells_data = JSON.parse(all_spells_data)
+  parsed_spells_data
 end
 
 
 def spells_object
-spells_parsing["results"]
+  spells_parsing["results"]
 end
 
 
@@ -106,15 +103,19 @@ def spell_info
   spell_info_hash
 end
 
+# puts spell_info
 
 def create_new_spell
-  spell_info.each do |spell_key, spell_val|
+  spell_info.each do |spell_val|
 
   Spell.create(
-  name: spell_key,
-  description: spell_val["desc"]
+    name: spell_val["name"],
   )
 
   end
 
 end
+
+create_new_monster
+create_new_language
+create_new_spell

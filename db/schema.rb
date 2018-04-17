@@ -14,16 +14,16 @@ ActiveRecord::Schema.define(version: 20180417145320) do
 
   create_table "languages", force: :cascade do |t|
     t.string "name"
-    t.string "type"
+    t.string "language_type"
   end
 
   create_table "monsters", force: :cascade do |t|
     t.string  "name"
-    t.string  "size"
-    t.string  "type"
     t.integer "hit_points"
-    t.integer "action_id"
-    t.integer "language_id"
+    t.string  "size"
+    t.string  "actions"
+    t.integer "challenge_rating"
+    t.integer "speed"
   end
 
   create_table "spells", force: :cascade do |t|
