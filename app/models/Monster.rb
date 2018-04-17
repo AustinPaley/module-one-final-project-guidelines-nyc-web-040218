@@ -1,5 +1,5 @@
 class Monster < ActiveRecord::Base
-  has_many :actions
+  has_many :spells
   has_many :languages
 
   def self.of_this_size(size)
