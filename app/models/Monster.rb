@@ -7,7 +7,7 @@ class Monster < ActiveRecord::Base
   end
 
 
-#HALLENGE RATING OUT OF TEN!?!?!?!?!?
+# CHALLENGE RATING OUT OF TEN!?!?!?!?!?
   # def self.easier_than(challenge_rating)
   #   Monster.all.map
 
