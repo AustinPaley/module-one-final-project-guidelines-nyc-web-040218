@@ -12,10 +12,6 @@
 
 ActiveRecord::Schema.define(version: 20180417145320) do
 
-  create_table "actions", force: :cascade do |t|
-    t.string "name"
-  end
-
   create_table "languages", force: :cascade do |t|
     t.string "name"
     t.string "type"
@@ -28,6 +24,10 @@ ActiveRecord::Schema.define(version: 20180417145320) do
     t.integer "hit_points"
     t.integer "action_id"
     t.integer "language_id"
+  end
+
+  create_table "spells", force: :cascade do |t|
+    t.string "name"
   end
 
 end
