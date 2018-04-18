@@ -4,57 +4,7 @@ class Monster < ActiveRecord::Base
   has_many :languages
 
 
-# NOT SURE WHAT monster_key (the hash) is actually called
-  def self.of_this_size(size)
-    Monster.all.select do |mon|
-      mon[:size].downcase == size.downcase
-    end #or use SELECT?
-  end
-
-  def self.easier_than(difficulty)
-     Monster.all.select do |mon|
-       if mon.challenge_rating < difficulty
-         mon.name
-       end
-     end
-   end
-
-  def self.harder_than(difficulty)
-     Monster.all.select do |mon|
-       if mon.challenge_rating > difficulty
-         mon.name
-       end  #for this and above OR mon[:challenge_rating] instead of .challenge_rating
-     end
-   end
-
-   def self.between_easy_and_hard(low_difficulty, high_difficulty)
-     Monster.all.select do |mon|
-       if mon.challenge_rating > low_difficulty && mon.challenge_rating < high_difficulty
-         mon
-       end
-     end
-   end
-
-  def self.who_speak(language)
-    Monster.all.select do |mon|
-      if mon.languages == language
-        mon
-      end
-    end
-  end
-
-  def is_successfully_attacked(user_attack_damage) #<< NO CLUE IF WE'LL EVER HAVE THAT ARGUMENT TO GIVE
-    self.hit_points -= user_attack_damage
-    self.hit_points
-  end
-
-  def cleaned_action_data
-    Monster.all.map do |monster_object|
-      almost_cleaned = monster_object.actions.gsub(/[\[\]\\"]/, "")
-      cleaned = almost_cleaned[1..-2]
-      cleaned
-    end
-  end
+### MONSTER GENERATORS BY DIFFICULTY ###
 
   def self.generate_very_easy_monsters(number_of_monsters=0)
     if number_of_monsters == 0
@@ -121,27 +71,149 @@ class Monster < ActiveRecord::Base
       impossible_monsters.sample(number_of_monsters)
     end
   end
-#CHECK THIS OUT! IFS THIS A BETTER APPROACH THAN ALL THE ABOVE METHODS?
-  def self.random_monster#(*difficulty)
-    # if difficulty
-    #   Monster.all.select do |mon|
-    #     mon.challenge_rating == difficulty
-    #   end
-    # else
-      Monster.all.sample
-  #  end
+
+### END MONSTER GENERATORS BY DIFFICULTY ###
+
+
+### SIZE ENCYCLOPEDIA ###
+
+  def self.sizes
+    puts "Choose a monster size: Tiny, Small, Medium, Large, Huge, or Gargantuan"
+    while answer = gets.chomp
+      case answer.downcase
+      when "tiny"
+        Monster.tiny
+        break
+      when "small"
+        Monster.small
+        break
+      when "medium"
+        Monster.medium
+        break
+      when "large"
+        Monster.large
+        break
+      when "huge"
+        Monster.huge
+        break
+      when "gargantuan"
+        Monster.gargantuan
+        break
+      else
+      puts "Please enter a valid monster size."
+      end
+    end
   end
 
+### END SIZE ENCYCLOPEDIA ###
+
+
+###HELPER METHODS###
+
+  def self.tiny
+    tiny_monster = Monster.all.select do |monster_object|
+      monster_object.size == "Tiny"
+    end
+    tiny_monster.map do |monster_object|
+      puts ""
+      puts "#{monster_object.name}"
+      puts "Challenge Rating: #{monster_object.challenge_rating}"
+      puts "Hit Points: #{monster_object.hit_points}"
+      puts ""
+      puts "==========="
+    end
+  end
+
+  def self.small
+    small_monster = Monster.all.select do |monster_object|
+      monster_object.size == "Small"
+    end
+    small_monster.map do |monster_object|
+      puts ""
+      puts "#{monster_object.name}"
+      puts "Challenge Rating: #{monster_object.challenge_rating}"
+      puts "Hit Points: #{monster_object.hit_points}"
+      puts ""
+      puts "==========="
+    end
+  end
+
+  def self.medium
+    medium_monster = Monster.all.select do |monster_object|
+      monster_object.size == "Medium"
+    end
+    medium_monster.map do |monster_object|
+      puts ""
+      puts "#{monster_object.name}"
+      puts "Challenge Rating: #{monster_object.challenge_rating}"
+      puts "Hit Points: #{monster_object.hit_points}"
+      puts ""
+      puts "==========="
+    end
+  end
+
+  def self.large
+    large_monster = Monster.all.select do |monster_object|
+      monster_object.size == "Large"
+    end
+    large_monster.map do |monster_object|
+      puts ""
+      puts "#{monster_object.name}"
+      puts "Challenge Rating: #{monster_object.challenge_rating}"
+      puts "Hit Points: #{monster_object.hit_points}"
+      puts ""
+      puts "==========="
+    end
+  end
+
+  def self.huge
+    huge_monster = Monster.all.select do |monster_object|
+      monster_object.size == "Huge"
+    end
+    huge_monster.map do |monster_object|
+      puts ""
+      puts "#{monster_object.name}"
+      puts "Challenge Rating: #{monster_object.challenge_rating}"
+      puts "Hit Points: #{monster_object.hit_points}"
+      puts ""
+      puts "==========="
+    end
+  end
+
+  def self.gargantuan
+    gargantuan_monster = Monster.all.select do |monster_object|
+      monster_object.size == "Gargantuan"
+    end
+    gargantuan_monster.map do |monster_object|
+      puts ""
+      puts "#{monster_object.name}"
+      puts "Challenge Rating: #{monster_object.challenge_rating}"
+      puts "Hit Points: #{monster_object.hit_points}"
+      puts ""
+      puts "==========="
+    end
+  end
+
+  def self.random_monster
+      Monster.all.sample
+  end
+
+  def cleaned_action_data
+    Monster.all.map do |monster_object|
+      almost_cleaned = monster_object.actions.gsub(/[\[\]\\"]/, "")
+      cleaned = almost_cleaned[1..-2]
+      cleaned
+    end
+  end
+
+### END SIZE HELPER METHODS ###
+
+
+
+
+
+
+
+
+
 end
-
-
-
-# Monster.create(
-#    name: monster_key,
-#    hp: monster_val["hit_points"],
-#    size: monster_val["size"],
-#    actions: monster_val["actions"],
-#    challenge_rating: monster_val["challenge_rating"],
-#    speed: monster_val["speed"],
-#    languages: monster_val["languages"]
-#    )
