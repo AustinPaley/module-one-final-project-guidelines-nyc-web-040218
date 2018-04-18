@@ -37,6 +37,18 @@ def create_new_monster
     actions: monster_val["actions"],
     challenge_rating: monster_val["challenge_rating"],
     speed: monster_val["speed"],
+    armor_class: monster_val["armor_class"],
+    strength: monster_val["strength"],
+    dexterity: monster_val["dexterity"],
+    constitution: monster_val["constitution"],
+    intelligence: monster_val["intelligence"],
+    wisdom: monster_val["wisdom"],
+    constitution_save: monster_val["constitution_save"],
+    intelligence_save: monster_val["intelligence_save"],
+    wisdom_save: monster_val["wisdom_save"],
+    history: monster_val["history"],
+    perception: monster_val["perception"]
+
     )
 
   end
@@ -117,6 +129,45 @@ def create_new_spell
 
 end
 
+###EQUIPMENT DATA###
+
+def equipment_parsing
+all_equipment_data = RestClient.get("http://www.dnd5eapi.co/api/equipment")
+parsed_equipment_data = JSON.parse(all_equipment_data)
+parsed_equipment_data
+end
+
+
+def equipment_object
+  equipment_parsing["results"]
+end
+
+def equipment_info
+  equipment_info_hash={}
+  equipment_info_hashes = equipment_object.map do |equipment_obj|
+    equipment_data = RestClient.get(equipment_obj["url"])
+    cleaned_equipment_data = JSON.parse(equipment_data)
+    equipment_info_hash[cleaned_equipment_data["name"]] = cleaned_equipment_data
+  end
+  equipment_info_hash
+end
+
+
+def create_new_equipment
+  equipment_info.each do |equipment_key, equipment_val|
+
+    Equipment.create(
+    name: equipment_key,
+    category: equipment_val["equipment_category"],
+    value: equipment_val["cost"]
+
+    )
+
+  end
+
+end
+
 create_new_monster
 create_new_language
 create_new_spell
+create_new_equipment
