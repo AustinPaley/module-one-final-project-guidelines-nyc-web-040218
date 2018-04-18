@@ -1,10 +1,6 @@
 require_relative '../config/environment'
 require 'pry'
 
-<<<<<<< HEAD
-
-Encounter.new_swamp_encounter(0)
-=======
 Equipment.types
 
 # def run
@@ -31,4 +27,3 @@ Equipment.types
 # end
 
 # run
->>>>>>> d2bd763cbf3b35518c44463f8bf1623136e16c75
