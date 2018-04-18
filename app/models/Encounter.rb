@@ -3,9 +3,38 @@ class Encounter < ActiveRecord::Base
   has_many :languages, through: :monsters
   has_many :spells, through: :monsters
 
-  # def new_random_encounter(location, number_of_monsters)
-  #   puts "You have entered #{location}. Heavy breathing slowly draws closer. You suddenly see #{number_of_monsters} " #RANDOM MONSTERS
-  # end
+  def self.new_random_encounter
+    array = ["swamp", "desert", "forest", "deep_woods", "cave", "at_sea", "fortress", "field", "volcano"]
+    random_location = array.sample
+    if random_location == "swamp"
+      puts "You are in a #{random_location}."
+      Encounter.new_swamp_encounter
+    elsif random_location == "desert"
+      puts "You are in a #{random_location}."
+      Encounter.new_desert_encounter
+    elsif random_location == "forest"
+      puts "You are in a #{random_location}."
+      Encounter.new_forest_encounter
+    elsif random_location == "deep_woods"
+      puts "You are in a #{random_location}."
+      Encounter.new_deep_woods_encounter
+    elsif random_location == "cave"
+      puts "You are in a #{random_location}."
+      Encounter.new_cave_encounter
+    elsif random_location == "at_sea"
+      puts "You are in a #{random_location}."
+      Encounter.new_at_sea_encounter
+    elsif random_location == "fortress"
+      puts "You are in a #{random_location}."
+      Encounter.new_fortress_encounter
+    elsif random_location == "field"
+      puts "You are in a #{random_location}."
+      Encounter.new_field_encounter
+    elsif random_location == "volcano"
+      puts "You are in a #{random_location}."
+      Encounter.new_volcano_encounter
+    end
+  end
 
   # *** ENCOUNTERS WITH MONSTERS IN CERTAIN LOCATIONS ***
 
