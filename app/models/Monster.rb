@@ -116,11 +116,25 @@ class Monster < ActiveRecord::Base
       puts "Please enter how many monsters you would like."
     else
       impossible_monsters = Monster.all.select do |monster_obj|
-        monster_obj.challenge_rating > 20 && monster_obj.challenge_rating < 30
+        monster_obj.challenge_rating > 20 && monster_obj.challenge_rating <= 30
       end
       impossible_monsters.sample(number_of_monsters)
     end
   end
+#CHECK THIS OUT! IFS THIS A BETTER APPROACH THAN ALL THE ABOVE METHODS?
+  def self.random_monster#(*difficulty)
+    # if difficulty
+    #   Monster.all.select do |mon|
+    #     mon.challenge_rating == difficulty
+    #   end
+    # else
+      Monster.all.sample
+  #  end
+  end
+
+#  def self.
+  # def random_location_monster(*difficulty)
+  # end
 
 end
 

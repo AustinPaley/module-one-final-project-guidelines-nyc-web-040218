@@ -1,4 +1,5 @@
 require_relative '../config/environment'
 require 'pry'
 
-binding.pry
+
+Encounter.new_swamp_encounter(0)
