@@ -1,7 +1,7 @@
 require_relative '../config/environment'
 require 'pry'
 
-Equipment.types
+Language.types
 
 # def run
 # puts "
