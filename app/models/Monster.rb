@@ -1,4 +1,5 @@
 class Monster < ActiveRecord::Base
+  belongs_to :encounters
   has_many :spells
   has_many :languages
 
@@ -51,7 +52,7 @@ class Monster < ActiveRecord::Base
     Monster.all.map do |monster_object|
       almost_cleaned = monster_object.actions.gsub(/[\[\]\\"]/, "")
       cleaned = almost_cleaned[1..-2]
-      binding.pry
+      # binding.pry
       cleaned
     end
   end
