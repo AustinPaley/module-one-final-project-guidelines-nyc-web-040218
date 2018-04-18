@@ -1,4 +1,5 @@
 class Monster < ActiveRecord::Base
+  belongs_to :encounters
   has_many :spells
   has_many :languages
 

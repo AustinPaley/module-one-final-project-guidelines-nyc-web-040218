@@ -12,6 +12,10 @@
 
 ActiveRecord::Schema.define(version: 20180418134453) do
 
+  create_table "encounters", force: :cascade do |t|
+    t.string "location"
+  end
+
   create_table "equipment", force: :cascade do |t|
     t.string "name"
     t.string "category"

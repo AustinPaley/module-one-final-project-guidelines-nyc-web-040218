@@ -1,5 +1,6 @@
 class Language < ActiveRecord::Base
-  belongs_to :monster
+  belongs_to :monsters
+
 
   def which_monsters_speak
     Monster.all.map do |mon|
