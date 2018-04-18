@@ -132,10 +132,6 @@ class Monster < ActiveRecord::Base
   #  end
   end
 
-#  def self.
-  # def random_location_monster(*difficulty)
-  # end
-
 end
 
 
