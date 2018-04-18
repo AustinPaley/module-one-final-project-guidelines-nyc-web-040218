@@ -8,9 +8,7 @@ class Language < ActiveRecord::Base
     end
   end #HUGE POTENTIAL PROBLEM because languages are stored as one string that has to be split
 
-
-
-
+  
 
 
 end
