@@ -30,7 +30,7 @@ end
 def create_new_monster
   monster_info.each do |monster_key, monster_val|
 
-    Monster.create(
+    monster_key = Monster.create(
     name: monster_key,
     hit_points: monster_val["hit_points"],
     size: monster_val["size"],
