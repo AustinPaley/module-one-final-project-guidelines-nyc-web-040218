@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(version: 20180418134453) do
     t.integer "constitution"
     t.integer "intelligence"
     t.integer "wisdom"
+    t.integer "charisma"
     t.integer "constitution_save"
     t.integer "intelligence_save"
     t.integer "wisdom_save"

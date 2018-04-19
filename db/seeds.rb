@@ -43,6 +43,7 @@ def create_new_monster
     constitution: monster_val["constitution"],
     intelligence: monster_val["intelligence"],
     wisdom: monster_val["wisdom"],
+    charisma: monster_val["charisma"],
     constitution_save: monster_val["constitution_save"],
     intelligence_save: monster_val["intelligence_save"],
     wisdom_save: monster_val["wisdom_save"],
