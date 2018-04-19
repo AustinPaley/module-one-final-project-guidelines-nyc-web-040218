@@ -3,34 +3,6 @@ class Monster < ActiveRecord::Base
   has_many :spells
   has_many :languages
 
-  def self.sizes
-    puts "Choose a monster size: Tiny, Small, Medium, Large, Huge, or Gargantuan"
-    while answer = gets.chomp
-      case answer.downcase
-      when "tiny"
-        Monster.tiny
-        break
-      when "small"
-        Monster.small
-        break
-      when "medium"
-        Monster.medium
-        break
-      when "large"
-        Monster.large
-        break
-      when "huge"
-        Monster.huge
-        break
-      when "gargantuan"
-        Monster.gargantuan
-        break
-      else
-      puts "Please enter a valid monster size."
-      end
-    end
-  end
-
 
 ### MONSTER GENERATORS BY DIFFICULTY ###
 
