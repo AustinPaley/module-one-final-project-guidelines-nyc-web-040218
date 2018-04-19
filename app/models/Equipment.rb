@@ -172,13 +172,13 @@ belongs_to :encounters
     num_of_items = rand(1..4)
     if num_of_items == 1
       item = Equipment.random_item
-      puts "You found a #{item.name}."
+      puts "***If successful, your party finds a #{item.name}.***"
     elsif num_of_items == 2
       num_of_items.times do
       item = Equipment.random_item
       this_encounters_items.push(item)
     end
-      puts "You found a #{this_encounters_items[0].name} and a #{this_encounters_items[1].name}."
+      puts "***If successful, your party finds a #{this_encounters_items[0].name} and a #{this_encounters_items[1].name}.***"
     else
       num_of_items.times do
       item = Equipment.random_item
@@ -193,7 +193,7 @@ belongs_to :encounters
       all_but_last_item = this_encounters_items.join(', ')
       and_last_item = ", and a #{last_item}"
       the_whole_shabang = all_but_last_item + and_last_item
-      puts "You found #{the_whole_shabang}."
+      puts "***If successful, your party finds #{the_whole_shabang}.***"
     end
   end
 

@@ -50,6 +50,7 @@ class Encounter < ActiveRecord::Base
         puts ""
         puts "As you're traveling through the swamp, you suddenly encounter a #{monster.name}."
         puts ""
+        puts "#{Equipment.random_number_of_items_as_string}"
         puts "======================================================================"
         puts ""
         puts "Name: #{monster.name}"
@@ -89,12 +90,14 @@ class Encounter < ActiveRecord::Base
             puts "======================================================================"
             puts ""
             puts "As you're traveling through the swamp, you suddenly encounter a #{monster_object.name}"
+            puts ""
             counter += 1
             else
             puts "and a #{monster_object.name}."
             end
           end
         puts ""
+        puts "#{Equipment.random_number_of_items_as_string}"
         this_encounters_monsters.map do |monster_object|
           puts "======================================================================"
           puts ""
@@ -144,8 +147,9 @@ class Encounter < ActiveRecord::Base
           counter_2 += 1
           end
         end
+        puts ""
+        puts "#{Equipment.random_number_of_items_as_string}"
           this_encounters_monsters.map do |monster_object|
-            puts ""
             puts "======================================================================"
             puts ""
             puts "Name: #{monster_object.name}"
@@ -189,6 +193,7 @@ class Encounter < ActiveRecord::Base
         puts ""
         puts "As you're traveling through the desert, you suddenly encounter a #{monster.name}."
         puts ""
+        puts "#{Equipment.random_number_of_items_as_string}"
         puts "======================================================================"
         puts ""
         puts "Name: #{monster.name}"
@@ -233,7 +238,8 @@ class Encounter < ActiveRecord::Base
             puts "and a #{monster_object.name}."
             end
           end
-        puts ""
+          puts ""
+          puts "#{Equipment.random_number_of_items_as_string}"
         this_encounters_monsters.map do |monster_object|
           puts "======================================================================"
           puts ""
@@ -283,8 +289,9 @@ class Encounter < ActiveRecord::Base
           counter_2 += 1
           end
         end
+        puts ""
+        puts "#{Equipment.random_number_of_items_as_string}"
           this_encounters_monsters.map do |monster_object|
-            puts ""
             puts "======================================================================"
             puts ""
             puts "Name: #{monster_object.name}"
@@ -328,6 +335,7 @@ class Encounter < ActiveRecord::Base
         puts ""
         puts "As you're traveling through the forest, you suddenly encounter a #{monster.name}."
         puts ""
+        puts "#{Equipment.random_number_of_items_as_string}"
         puts "======================================================================"
         puts ""
         puts "Name: #{monster.name}"
@@ -372,7 +380,8 @@ class Encounter < ActiveRecord::Base
             puts "and a #{monster_object.name}."
             end
           end
-        puts ""
+          puts ""
+          puts "#{Equipment.random_number_of_items_as_string}"
         this_encounters_monsters.map do |monster_object|
           puts "======================================================================"
           puts ""
@@ -422,8 +431,9 @@ class Encounter < ActiveRecord::Base
           counter_2 += 1
           end
         end
+        puts ""
+        puts "#{Equipment.random_number_of_items_as_string}"
           this_encounters_monsters.map do |monster_object|
-            puts ""
             puts "======================================================================"
             puts ""
             puts "Name: #{monster_object.name}"
@@ -467,6 +477,7 @@ class Encounter < ActiveRecord::Base
         puts ""
         puts "As you're traveling through the deep woods, you suddenly encounter a #{monster.name}."
         puts ""
+        puts "#{Equipment.random_number_of_items_as_string}"
         puts "======================================================================"
         puts ""
         puts "Name: #{monster.name}"
@@ -511,7 +522,8 @@ class Encounter < ActiveRecord::Base
             puts "and a #{monster_object.name}."
             end
           end
-        puts ""
+          puts ""
+          puts "#{Equipment.random_number_of_items_as_string}"
         this_encounters_monsters.map do |monster_object|
           puts "======================================================================"
           puts ""
@@ -561,8 +573,9 @@ class Encounter < ActiveRecord::Base
           counter_2 += 1
           end
         end
+        puts ""
+        puts "#{Equipment.random_number_of_items_as_string}"
           this_encounters_monsters.map do |monster_object|
-            puts ""
             puts "======================================================================"
             puts ""
             puts "Name: #{monster_object.name}"
@@ -606,6 +619,7 @@ class Encounter < ActiveRecord::Base
         puts ""
         puts "As you're traveling through a cave, you suddenly encounter a #{monster.name}."
         puts ""
+        puts "#{Equipment.random_number_of_items_as_string}"
         puts "======================================================================"
         puts ""
         puts "Name: #{monster.name}"
@@ -650,7 +664,8 @@ class Encounter < ActiveRecord::Base
             puts "and a #{monster_object.name}."
             end
           end
-        puts ""
+          puts ""
+          puts "#{Equipment.random_number_of_items_as_string}"
         this_encounters_monsters.map do |monster_object|
           puts "======================================================================"
           puts ""
@@ -700,8 +715,9 @@ class Encounter < ActiveRecord::Base
           counter_2 += 1
           end
         end
+        puts ""
+        puts "#{Equipment.random_number_of_items_as_string}"
           this_encounters_monsters.map do |monster_object|
-            puts ""
             puts "======================================================================"
             puts ""
             puts "Name: #{monster_object.name}"
@@ -745,6 +761,7 @@ class Encounter < ActiveRecord::Base
         puts ""
         puts "As you're sailing the sea, you suddenly encounter a #{monster.name}."
         puts ""
+        puts "#{Equipment.random_number_of_items_as_string}"
         puts "======================================================================"
         puts ""
         puts "Name: #{monster.name}"
@@ -789,7 +806,8 @@ class Encounter < ActiveRecord::Base
             puts "and a #{monster_object.name}."
             end
           end
-        puts ""
+          puts ""
+          puts "#{Equipment.random_number_of_items_as_string}"
         this_encounters_monsters.map do |monster_object|
           puts "======================================================================"
           puts ""
@@ -839,8 +857,9 @@ class Encounter < ActiveRecord::Base
           counter_2 += 1
           end
         end
+        puts ""
+        puts "#{Equipment.random_number_of_items_as_string}"
           this_encounters_monsters.map do |monster_object|
-            puts ""
             puts "======================================================================"
             puts ""
             puts "Name: #{monster_object.name}"
@@ -884,6 +903,7 @@ class Encounter < ActiveRecord::Base
         puts ""
         puts "As you're exploring the fortress, you suddenly encounter a #{monster.name}."
         puts ""
+        puts "#{Equipment.random_number_of_items_as_string}"
         puts "======================================================================"
         puts ""
         puts "Name: #{monster.name}"
@@ -928,7 +948,8 @@ class Encounter < ActiveRecord::Base
             puts "and a #{monster_object.name}."
             end
           end
-        puts ""
+          puts ""
+          puts "#{Equipment.random_number_of_items_as_string}"
         this_encounters_monsters.map do |monster_object|
           puts "======================================================================"
           puts ""
@@ -978,8 +999,9 @@ class Encounter < ActiveRecord::Base
           counter_2 += 1
           end
         end
+        puts ""
+        puts "#{Equipment.random_number_of_items_as_string}"
           this_encounters_monsters.map do |monster_object|
-            puts ""
             puts "======================================================================"
             puts ""
             puts "Name: #{monster_object.name}"
@@ -1023,6 +1045,7 @@ class Encounter < ActiveRecord::Base
         puts ""
         puts "As you're traveling through a field, you suddenly encounter a #{monster.name}."
         puts ""
+        puts "#{Equipment.random_number_of_items_as_string}"
         puts "======================================================================"
         puts ""
         puts "Name: #{monster.name}"
@@ -1067,7 +1090,8 @@ class Encounter < ActiveRecord::Base
             puts "and a #{monster_object.name}."
             end
           end
-        puts ""
+          puts ""
+          puts "#{Equipment.random_number_of_items_as_string}"
         this_encounters_monsters.map do |monster_object|
           puts "======================================================================"
           puts ""
@@ -1117,8 +1141,9 @@ class Encounter < ActiveRecord::Base
           counter_2 += 1
           end
         end
+        puts ""
+        puts "#{Equipment.random_number_of_items_as_string}"
           this_encounters_monsters.map do |monster_object|
-            puts ""
             puts "======================================================================"
             puts ""
             puts "Name: #{monster_object.name}"
@@ -1162,6 +1187,7 @@ class Encounter < ActiveRecord::Base
         puts ""
         puts "As you're exploring the volcano, you suddenly encounter a #{monster.name}."
         puts ""
+        puts "#{Equipment.random_number_of_items_as_string}"
         puts "======================================================================"
         puts ""
         puts "Name: #{monster.name}"
@@ -1206,7 +1232,8 @@ class Encounter < ActiveRecord::Base
             puts "and a #{monster_object.name}."
             end
           end
-        puts ""
+          puts ""
+          puts "#{Equipment.random_number_of_items_as_string}"
         this_encounters_monsters.map do |monster_object|
           puts "======================================================================"
           puts ""
@@ -1256,8 +1283,9 @@ class Encounter < ActiveRecord::Base
           counter_2 += 1
           end
         end
+        puts ""
+        puts "#{Equipment.random_number_of_items_as_string}"
           this_encounters_monsters.map do |monster_object|
-            puts ""
             puts "======================================================================"
             puts ""
             puts "Name: #{monster_object.name}"
