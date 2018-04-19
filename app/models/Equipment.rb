@@ -133,7 +133,7 @@ belongs_to :encounters
   end
 
   def self.find_item(name, category = false)
-    if category
+    if category.is_a?(String) && category != ""
       cat_format = category.tr(' ', '_').downcase
       if cat_format == "weapons"
         Equipment.weapons.select do |item|
@@ -193,11 +193,8 @@ belongs_to :encounters
       all_but_last_item = this_encounters_items.join(', ')
       and_last_item = ", and a #{last_item}"
       the_whole_shabang = all_but_last_item + and_last_item
-<<<<<<< HEAD
       puts "You found .#{the_whole_shabang}."
-=======
       puts "***If successful, your party finds #{the_whole_shabang}.***"
->>>>>>> 9281be7d3d38e87ac7c4b072df2d6019b1356645
     end
   end
 
