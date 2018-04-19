@@ -193,7 +193,6 @@ belongs_to :encounters
       all_but_last_item = this_encounters_items.join(', ')
       and_last_item = ", and a #{last_item}"
       the_whole_shabang = all_but_last_item + and_last_item
-      puts "You found .#{the_whole_shabang}."
       puts "***If successful, your party finds #{the_whole_shabang}.***"
     end
   end
