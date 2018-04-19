@@ -46,6 +46,7 @@ class Encounter < ActiveRecord::Base
         puts "Please enter a number greater than zero."
       elsif number_of_monsters == 1
         monster = Monster.random_monster
+        puts "======================================================================"
         puts ""
         puts "As you're traveling through the swamp, you suddenly encounter a #{monster.name}."
         puts ""
@@ -85,6 +86,8 @@ class Encounter < ActiveRecord::Base
         puts ""
           this_encounters_monsters.map do |monster_object|
             if counter == 0
+            puts "======================================================================"
+            puts ""
             puts "As you're traveling through the swamp, you suddenly encounter a #{monster_object.name}"
             counter += 1
             else
@@ -121,28 +124,28 @@ class Encounter < ActiveRecord::Base
         end
         break
       else
+        counter_2 = 0
         this_encounters_monsters = []
-        final_encounters_monsters = []
         number_of_monsters.times do
           monster = Monster.random_monster
           this_encounters_monsters.push(monster)
-          final_encounters_monsters.push(monster)
         end
-        # binding.pry
-          last_monster = this_encounters_monsters.pop
-          i = 0
-          until i == this_encounters_monsters.length
-            this_encounters_monsters[i].name.prepend('a ')
-            i += 1
-          end
-          all_but_last_monster_name = this_encounters_monsters.map do |monster_obj|
-            monster_obj.name
-          end
-          and_last_monster_name = ", and a #{last_monster.name}"
-          the_whole_shabang = all_but_last_monster_name.join(", ") + and_last_monster_name
-          puts "As you're traveling through the swamp, you suddenly encounter #{the_whole_shabang}."
+        this_encounters_monsters.map do |monster_object|
+          if counter_2 == 0
+          puts "======================================================================"
           puts ""
-          final_encounters_monsters.map do |monster_object|
+          print "As you're traveling through the swamp, you suddenly encounter a #{monster_object.name},"
+          counter_2 += 1
+          elsif counter_2 == this_encounters_monsters.length - 1
+          print " and a #{monster_object.name}."
+          puts ""
+          else
+          print " a #{monster_object.name},"
+          counter_2 += 1
+          end
+        end
+          this_encounters_monsters.map do |monster_object|
+            puts ""
             puts "======================================================================"
             puts ""
             puts "Name: #{monster_object.name}"
@@ -178,36 +181,136 @@ class Encounter < ActiveRecord::Base
     loop do
       puts "How many monsters?"
       number_of_monsters = gets.chomp.to_i
-      if number_of_monsters.is_a?(Integer) && number_of_monsters < 1
+      if number_of_monsters < 1
         puts "Please enter a number greater than zero."
       elsif number_of_monsters == 1
         monster = Monster.random_monster
+        puts "======================================================================"
+        puts ""
         puts "As you're traveling through the desert, you suddenly encounter a #{monster.name}."
-        break
+        puts ""
+        puts "======================================================================"
+        puts ""
+        puts "Name: #{monster.name}"
+        puts "Size: #{monster.size}"
+        puts "Hit Points: #{monster.hit_points}"
+        puts "Challenge Rating: #{monster.challenge_rating}"
+        puts "Speed: #{monster.speed}, Armor Class: #{monster.armor_class}"
+        puts ""
+        puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+        puts " STR: #{monster.strength}, DEX: #{monster.dexterity}, CON: #{monster.constitution}, INT: #{monster.intelligence}, WIS: #{monster.wisdom}, CHA: #{monster.charisma}"
+        puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+        puts ""
+        puts "ACTIONS"
+        puts ""
+          if monster.actions != "nil"
+            one_line_cleaned_monster_objects = monster.actions.gsub(/[\[\]\\"]/, "")
+            one_line_cleaned_monster_objects.split("},").map do |one_line_monster_actions|
+            puts one_line_monster_actions
+            puts ""
+            end
+          else
+            puts "N/A"
+          end
+        puts "======================================================================"
+        puts ""
+      break
       elsif number_of_monsters == 2
+        counter = 0
         this_encounters_monsters = []
         number_of_monsters.times do
           monster = Monster.random_monster
-          this_encounters_monsters.push(monster.name)
+          this_encounters_monsters << Monster.random_monster
         end
-        puts "As you're traveling through the desert, you suddenly encounter a #{this_encounters_monsters[0]} and a #{this_encounters_monsters[1]}."
+        puts ""
+          this_encounters_monsters.map do |monster_object|
+            if counter == 0
+            puts "======================================================================"
+            puts ""
+            puts "As you're traveling through the desert, you suddenly encounter a #{monster_object.name}"
+            counter += 1
+            else
+            puts "and a #{monster_object.name}."
+            end
+          end
+        puts ""
+        this_encounters_monsters.map do |monster_object|
+          puts "======================================================================"
+          puts ""
+          puts "Name: #{monster_object.name}"
+          puts "Size: #{monster_object.size}"
+          puts "Hit Points: #{monster_object.hit_points}"
+          puts "Challenge Rating: #{monster_object.challenge_rating}"
+          puts "Speed: #{monster_object.speed}, Armor Class: #{monster_object.armor_class}"
+          puts ""
+          puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+          puts " STR: #{monster_object.strength}, DEX: #{monster_object.dexterity}, CON: #{monster_object.constitution}, INT: #{monster_object.intelligence}, WIS: #{monster_object.wisdom}, CHA: #{monster_object.charisma}"
+          puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+          puts ""
+          puts "ACTIONS"
+          puts ""
+            if monster_object.actions != "nil"
+              one_line_cleaned_monster_objects = monster_object.actions.gsub(/[\[\]\\"]/, "")
+              one_line_cleaned_monster_objects.split("},").map do |one_line_monster_actions|
+              puts one_line_monster_actions
+              puts ""
+              end
+            else
+              puts "N/A"
+            end
+          puts "======================================================================"
+          puts ""
+        end
         break
       else
+        counter_2 = 0
         this_encounters_monsters = []
         number_of_monsters.times do
           monster = Monster.random_monster
-          this_encounters_monsters.push(monster.name)
+          this_encounters_monsters.push(monster)
         end
-          last_monster = this_encounters_monsters.pop
-          i = 0
-          until i == this_encounters_monsters.length
-            this_encounters_monsters[i].prepend('a ')
-            i += 1
+        this_encounters_monsters.map do |monster_object|
+          if counter_2 == 0
+          puts "======================================================================"
+          puts ""
+          print "As you're traveling through the desert, you suddenly encounter a #{monster_object.name},"
+          counter_2 += 1
+          elsif counter_2 == this_encounters_monsters.length - 1
+          print " and a #{monster_object.name}."
+          puts ""
+          else
+          print " a #{monster_object.name},"
+          counter_2 += 1
           end
-          all_but_last_monster = this_encounters_monsters.join(', ')
-          and_last_monster = ", and a #{last_monster}"
-          the_whole_shabang = all_but_last_monster + and_last_monster
-          puts "As you're traveling through the desert, you suddenly encounter #{the_whole_shabang}."
+        end
+          this_encounters_monsters.map do |monster_object|
+            puts ""
+            puts "======================================================================"
+            puts ""
+            puts "Name: #{monster_object.name}"
+            puts "Size: #{monster_object.size}"
+            puts "Hit Points: #{monster_object.hit_points}"
+            puts "Challenge Rating: #{monster_object.challenge_rating}"
+            puts "Speed: #{monster_object.speed}, Armor Class: #{monster_object.armor_class}"
+            puts ""
+            puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+            puts " STR: #{monster_object.strength}, DEX: #{monster_object.dexterity}, CON: #{monster_object.constitution}, INT: #{monster_object.intelligence}, WIS: #{monster_object.wisdom}, CHA: #{monster_object.charisma}"
+            puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+            puts ""
+            puts "ACTIONS"
+            puts ""
+              if monster_object.actions != "nil"
+                one_line_cleaned_monster_objects = monster_object.actions.gsub(/[\[\]\\"]/, "")
+                one_line_cleaned_monster_objects.split("},").map do |one_line_monster_actions|
+                puts one_line_monster_actions
+                puts ""
+                end
+              else
+                puts "N/A"
+              end
+            puts "======================================================================"
+            puts ""
+          end
           break
       end
     end
@@ -217,36 +320,136 @@ class Encounter < ActiveRecord::Base
     loop do
       puts "How many monsters?"
       number_of_monsters = gets.chomp.to_i
-      if number_of_monsters.is_a?(Integer) && number_of_monsters < 1
+      if number_of_monsters < 1
         puts "Please enter a number greater than zero."
       elsif number_of_monsters == 1
         monster = Monster.random_monster
+        puts "======================================================================"
+        puts ""
         puts "As you're traveling through the forest, you suddenly encounter a #{monster.name}."
-        break
+        puts ""
+        puts "======================================================================"
+        puts ""
+        puts "Name: #{monster.name}"
+        puts "Size: #{monster.size}"
+        puts "Hit Points: #{monster.hit_points}"
+        puts "Challenge Rating: #{monster.challenge_rating}"
+        puts "Speed: #{monster.speed}, Armor Class: #{monster.armor_class}"
+        puts ""
+        puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+        puts " STR: #{monster.strength}, DEX: #{monster.dexterity}, CON: #{monster.constitution}, INT: #{monster.intelligence}, WIS: #{monster.wisdom}, CHA: #{monster.charisma}"
+        puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+        puts ""
+        puts "ACTIONS"
+        puts ""
+          if monster.actions != "nil"
+            one_line_cleaned_monster_objects = monster.actions.gsub(/[\[\]\\"]/, "")
+            one_line_cleaned_monster_objects.split("},").map do |one_line_monster_actions|
+            puts one_line_monster_actions
+            puts ""
+            end
+          else
+            puts "N/A"
+          end
+        puts "======================================================================"
+        puts ""
+      break
       elsif number_of_monsters == 2
+        counter = 0
         this_encounters_monsters = []
         number_of_monsters.times do
           monster = Monster.random_monster
-          this_encounters_monsters.push(monster.name)
+          this_encounters_monsters << Monster.random_monster
         end
-        puts "As you're traveling through the forest, you suddenly encounter a #{this_encounters_monsters[0]} and a #{this_encounters_monsters[1]}."
+        puts ""
+          this_encounters_monsters.map do |monster_object|
+            if counter == 0
+            puts "======================================================================"
+            puts ""
+            puts "As you're traveling through the forest, you suddenly encounter a #{monster_object.name}"
+            counter += 1
+            else
+            puts "and a #{monster_object.name}."
+            end
+          end
+        puts ""
+        this_encounters_monsters.map do |monster_object|
+          puts "======================================================================"
+          puts ""
+          puts "Name: #{monster_object.name}"
+          puts "Size: #{monster_object.size}"
+          puts "Hit Points: #{monster_object.hit_points}"
+          puts "Challenge Rating: #{monster_object.challenge_rating}"
+          puts "Speed: #{monster_object.speed}, Armor Class: #{monster_object.armor_class}"
+          puts ""
+          puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+          puts " STR: #{monster_object.strength}, DEX: #{monster_object.dexterity}, CON: #{monster_object.constitution}, INT: #{monster_object.intelligence}, WIS: #{monster_object.wisdom}, CHA: #{monster_object.charisma}"
+          puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+          puts ""
+          puts "ACTIONS"
+          puts ""
+            if monster_object.actions != "nil"
+              one_line_cleaned_monster_objects = monster_object.actions.gsub(/[\[\]\\"]/, "")
+              one_line_cleaned_monster_objects.split("},").map do |one_line_monster_actions|
+              puts one_line_monster_actions
+              puts ""
+              end
+            else
+              puts "N/A"
+            end
+          puts "======================================================================"
+          puts ""
+        end
         break
       else
+        counter_2 = 0
         this_encounters_monsters = []
         number_of_monsters.times do
           monster = Monster.random_monster
-          this_encounters_monsters.push(monster.name)
+          this_encounters_monsters.push(monster)
         end
-          last_monster = this_encounters_monsters.pop
-          i = 0
-          until i == this_encounters_monsters.length
-            this_encounters_monsters[i].prepend('a ')
-            i += 1
+        this_encounters_monsters.map do |monster_object|
+          if counter_2 == 0
+          puts "======================================================================"
+          puts ""
+          print "As you're traveling through the forest, you suddenly encounter a #{monster_object.name},"
+          counter_2 += 1
+          elsif counter_2 == this_encounters_monsters.length - 1
+          print " and a #{monster_object.name}."
+          puts ""
+          else
+          print " a #{monster_object.name},"
+          counter_2 += 1
           end
-          all_but_last_monster = this_encounters_monsters.join(', ')
-          and_last_monster = ", and a #{last_monster}"
-          the_whole_shabang = all_but_last_monster + and_last_monster
-          puts "As you're traveling through the forest, you suddenly encounter #{the_whole_shabang}."
+        end
+          this_encounters_monsters.map do |monster_object|
+            puts ""
+            puts "======================================================================"
+            puts ""
+            puts "Name: #{monster_object.name}"
+            puts "Size: #{monster_object.size}"
+            puts "Hit Points: #{monster_object.hit_points}"
+            puts "Challenge Rating: #{monster_object.challenge_rating}"
+            puts "Speed: #{monster_object.speed}, Armor Class: #{monster_object.armor_class}"
+            puts ""
+            puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+            puts " STR: #{monster_object.strength}, DEX: #{monster_object.dexterity}, CON: #{monster_object.constitution}, INT: #{monster_object.intelligence}, WIS: #{monster_object.wisdom}, CHA: #{monster_object.charisma}"
+            puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+            puts ""
+            puts "ACTIONS"
+            puts ""
+              if monster_object.actions != "nil"
+                one_line_cleaned_monster_objects = monster_object.actions.gsub(/[\[\]\\"]/, "")
+                one_line_cleaned_monster_objects.split("},").map do |one_line_monster_actions|
+                puts one_line_monster_actions
+                puts ""
+                end
+              else
+                puts "N/A"
+              end
+            puts "======================================================================"
+            puts ""
+          end
           break
       end
     end
@@ -256,36 +459,136 @@ class Encounter < ActiveRecord::Base
     loop do
       puts "How many monsters?"
       number_of_monsters = gets.chomp.to_i
-      if number_of_monsters.is_a?(Integer) && number_of_monsters < 1
+      if number_of_monsters < 1
         puts "Please enter a number greater than zero."
       elsif number_of_monsters == 1
         monster = Monster.random_monster
+        puts "======================================================================"
+        puts ""
         puts "As you're traveling through the deep woods, you suddenly encounter a #{monster.name}."
-        break
+        puts ""
+        puts "======================================================================"
+        puts ""
+        puts "Name: #{monster.name}"
+        puts "Size: #{monster.size}"
+        puts "Hit Points: #{monster.hit_points}"
+        puts "Challenge Rating: #{monster.challenge_rating}"
+        puts "Speed: #{monster.speed}, Armor Class: #{monster.armor_class}"
+        puts ""
+        puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+        puts " STR: #{monster.strength}, DEX: #{monster.dexterity}, CON: #{monster.constitution}, INT: #{monster.intelligence}, WIS: #{monster.wisdom}, CHA: #{monster.charisma}"
+        puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+        puts ""
+        puts "ACTIONS"
+        puts ""
+          if monster.actions != "nil"
+            one_line_cleaned_monster_objects = monster.actions.gsub(/[\[\]\\"]/, "")
+            one_line_cleaned_monster_objects.split("},").map do |one_line_monster_actions|
+            puts one_line_monster_actions
+            puts ""
+            end
+          else
+            puts "N/A"
+          end
+        puts "======================================================================"
+        puts ""
+      break
       elsif number_of_monsters == 2
+        counter = 0
         this_encounters_monsters = []
         number_of_monsters.times do
           monster = Monster.random_monster
-          this_encounters_monsters.push(monster.name)
+          this_encounters_monsters << Monster.random_monster
         end
-        puts "As you're traveling through the deep woods, you suddenly encounter a #{this_encounters_monsters[0]} and a #{this_encounters_monsters[1]}."
+        puts ""
+          this_encounters_monsters.map do |monster_object|
+            if counter == 0
+            puts "======================================================================"
+            puts ""
+            puts "As you're traveling through the deep woods, you suddenly encounter a #{monster_object.name}"
+            counter += 1
+            else
+            puts "and a #{monster_object.name}."
+            end
+          end
+        puts ""
+        this_encounters_monsters.map do |monster_object|
+          puts "======================================================================"
+          puts ""
+          puts "Name: #{monster_object.name}"
+          puts "Size: #{monster_object.size}"
+          puts "Hit Points: #{monster_object.hit_points}"
+          puts "Challenge Rating: #{monster_object.challenge_rating}"
+          puts "Speed: #{monster_object.speed}, Armor Class: #{monster_object.armor_class}"
+          puts ""
+          puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+          puts " STR: #{monster_object.strength}, DEX: #{monster_object.dexterity}, CON: #{monster_object.constitution}, INT: #{monster_object.intelligence}, WIS: #{monster_object.wisdom}, CHA: #{monster_object.charisma}"
+          puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+          puts ""
+          puts "ACTIONS"
+          puts ""
+            if monster_object.actions != "nil"
+              one_line_cleaned_monster_objects = monster_object.actions.gsub(/[\[\]\\"]/, "")
+              one_line_cleaned_monster_objects.split("},").map do |one_line_monster_actions|
+              puts one_line_monster_actions
+              puts ""
+              end
+            else
+              puts "N/A"
+            end
+          puts "======================================================================"
+          puts ""
+        end
         break
       else
+        counter_2 = 0
         this_encounters_monsters = []
         number_of_monsters.times do
           monster = Monster.random_monster
-          this_encounters_monsters.push(monster.name)
+          this_encounters_monsters.push(monster)
         end
-          last_monster = this_encounters_monsters.pop
-          i = 0
-          until i == this_encounters_monsters.length
-            this_encounters_monsters[i].prepend('a ')
-            i += 1
+        this_encounters_monsters.map do |monster_object|
+          if counter_2 == 0
+          puts "======================================================================"
+          puts ""
+          print "As you're traveling through the deep woods, you suddenly encounter a #{monster_object.name},"
+          counter_2 += 1
+          elsif counter_2 == this_encounters_monsters.length - 1
+          print " and a #{monster_object.name}."
+          puts ""
+          else
+          print " a #{monster_object.name},"
+          counter_2 += 1
           end
-          all_but_last_monster = this_encounters_monsters.join(', ')
-          and_last_monster = ", and a #{last_monster}"
-          the_whole_shabang = all_but_last_monster + and_last_monster
-          puts "As you're traveling through the deep woods, you suddenly encounter #{the_whole_shabang}."
+        end
+          this_encounters_monsters.map do |monster_object|
+            puts ""
+            puts "======================================================================"
+            puts ""
+            puts "Name: #{monster_object.name}"
+            puts "Size: #{monster_object.size}"
+            puts "Hit Points: #{monster_object.hit_points}"
+            puts "Challenge Rating: #{monster_object.challenge_rating}"
+            puts "Speed: #{monster_object.speed}, Armor Class: #{monster_object.armor_class}"
+            puts ""
+            puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+            puts " STR: #{monster_object.strength}, DEX: #{monster_object.dexterity}, CON: #{monster_object.constitution}, INT: #{monster_object.intelligence}, WIS: #{monster_object.wisdom}, CHA: #{monster_object.charisma}"
+            puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+            puts ""
+            puts "ACTIONS"
+            puts ""
+              if monster_object.actions != "nil"
+                one_line_cleaned_monster_objects = monster_object.actions.gsub(/[\[\]\\"]/, "")
+                one_line_cleaned_monster_objects.split("},").map do |one_line_monster_actions|
+                puts one_line_monster_actions
+                puts ""
+                end
+              else
+                puts "N/A"
+              end
+            puts "======================================================================"
+            puts ""
+          end
           break
       end
     end
@@ -295,36 +598,136 @@ class Encounter < ActiveRecord::Base
     loop do
       puts "How many monsters?"
       number_of_monsters = gets.chomp.to_i
-      if number_of_monsters.is_a?(Integer) && number_of_monsters < 1
+      if number_of_monsters < 1
         puts "Please enter a number greater than zero."
       elsif number_of_monsters == 1
         monster = Monster.random_monster
+        puts "======================================================================"
+        puts ""
         puts "As you're traveling through a cave, you suddenly encounter a #{monster.name}."
-        break
+        puts ""
+        puts "======================================================================"
+        puts ""
+        puts "Name: #{monster.name}"
+        puts "Size: #{monster.size}"
+        puts "Hit Points: #{monster.hit_points}"
+        puts "Challenge Rating: #{monster.challenge_rating}"
+        puts "Speed: #{monster.speed}, Armor Class: #{monster.armor_class}"
+        puts ""
+        puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+        puts " STR: #{monster.strength}, DEX: #{monster.dexterity}, CON: #{monster.constitution}, INT: #{monster.intelligence}, WIS: #{monster.wisdom}, CHA: #{monster.charisma}"
+        puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+        puts ""
+        puts "ACTIONS"
+        puts ""
+          if monster.actions != "nil"
+            one_line_cleaned_monster_objects = monster.actions.gsub(/[\[\]\\"]/, "")
+            one_line_cleaned_monster_objects.split("},").map do |one_line_monster_actions|
+            puts one_line_monster_actions
+            puts ""
+            end
+          else
+            puts "N/A"
+          end
+        puts "======================================================================"
+        puts ""
+      break
       elsif number_of_monsters == 2
+        counter = 0
         this_encounters_monsters = []
         number_of_monsters.times do
           monster = Monster.random_monster
-          this_encounters_monsters.push(monster.name)
+          this_encounters_monsters << Monster.random_monster
         end
-        puts "As you're traveling through a cave, you suddenly encounter a #{this_encounters_monsters[0]} and a #{this_encounters_monsters[1]}."
+        puts ""
+          this_encounters_monsters.map do |monster_object|
+            if counter == 0
+            puts "======================================================================"
+            puts ""
+            puts "As you're traveling through a cave, you suddenly encounter a #{monster_object.name}"
+            counter += 1
+            else
+            puts "and a #{monster_object.name}."
+            end
+          end
+        puts ""
+        this_encounters_monsters.map do |monster_object|
+          puts "======================================================================"
+          puts ""
+          puts "Name: #{monster_object.name}"
+          puts "Size: #{monster_object.size}"
+          puts "Hit Points: #{monster_object.hit_points}"
+          puts "Challenge Rating: #{monster_object.challenge_rating}"
+          puts "Speed: #{monster_object.speed}, Armor Class: #{monster_object.armor_class}"
+          puts ""
+          puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+          puts " STR: #{monster_object.strength}, DEX: #{monster_object.dexterity}, CON: #{monster_object.constitution}, INT: #{monster_object.intelligence}, WIS: #{monster_object.wisdom}, CHA: #{monster_object.charisma}"
+          puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+          puts ""
+          puts "ACTIONS"
+          puts ""
+            if monster_object.actions != "nil"
+              one_line_cleaned_monster_objects = monster_object.actions.gsub(/[\[\]\\"]/, "")
+              one_line_cleaned_monster_objects.split("},").map do |one_line_monster_actions|
+              puts one_line_monster_actions
+              puts ""
+              end
+            else
+              puts "N/A"
+            end
+          puts "======================================================================"
+          puts ""
+        end
         break
       else
+        counter_2 = 0
         this_encounters_monsters = []
         number_of_monsters.times do
           monster = Monster.random_monster
-          this_encounters_monsters.push(monster.name)
+          this_encounters_monsters.push(monster)
         end
-          last_monster = this_encounters_monsters.pop
-          i = 0
-          until i == this_encounters_monsters.length
-            this_encounters_monsters[i].prepend('a ')
-            i += 1
+        this_encounters_monsters.map do |monster_object|
+          if counter_2 == 0
+          puts "======================================================================"
+          puts ""
+          print "As you're traveling through a cave, you suddenly encounter a #{monster_object.name},"
+          counter_2 += 1
+          elsif counter_2 == this_encounters_monsters.length - 1
+          print " and a #{monster_object.name}."
+          puts ""
+          else
+          print " a #{monster_object.name},"
+          counter_2 += 1
           end
-          all_but_last_monster = this_encounters_monsters.join(', ')
-          and_last_monster = ", and a #{last_monster}"
-          the_whole_shabang = all_but_last_monster + and_last_monster
-          puts "As you're traveling through a cave, you suddenly encounter #{the_whole_shabang}."
+        end
+          this_encounters_monsters.map do |monster_object|
+            puts ""
+            puts "======================================================================"
+            puts ""
+            puts "Name: #{monster_object.name}"
+            puts "Size: #{monster_object.size}"
+            puts "Hit Points: #{monster_object.hit_points}"
+            puts "Challenge Rating: #{monster_object.challenge_rating}"
+            puts "Speed: #{monster_object.speed}, Armor Class: #{monster_object.armor_class}"
+            puts ""
+            puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+            puts " STR: #{monster_object.strength}, DEX: #{monster_object.dexterity}, CON: #{monster_object.constitution}, INT: #{monster_object.intelligence}, WIS: #{monster_object.wisdom}, CHA: #{monster_object.charisma}"
+            puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+            puts ""
+            puts "ACTIONS"
+            puts ""
+              if monster_object.actions != "nil"
+                one_line_cleaned_monster_objects = monster_object.actions.gsub(/[\[\]\\"]/, "")
+                one_line_cleaned_monster_objects.split("},").map do |one_line_monster_actions|
+                puts one_line_monster_actions
+                puts ""
+                end
+              else
+                puts "N/A"
+              end
+            puts "======================================================================"
+            puts ""
+          end
           break
       end
     end
@@ -334,36 +737,136 @@ class Encounter < ActiveRecord::Base
     loop do
       puts "How many monsters?"
       number_of_monsters = gets.chomp.to_i
-      if number_of_monsters.is_a?(Integer) && number_of_monsters < 1
+      if number_of_monsters < 1
         puts "Please enter a number greater than zero."
       elsif number_of_monsters == 1
         monster = Monster.random_monster
+        puts "======================================================================"
+        puts ""
         puts "As you're sailing the sea, you suddenly encounter a #{monster.name}."
-        break
+        puts ""
+        puts "======================================================================"
+        puts ""
+        puts "Name: #{monster.name}"
+        puts "Size: #{monster.size}"
+        puts "Hit Points: #{monster.hit_points}"
+        puts "Challenge Rating: #{monster.challenge_rating}"
+        puts "Speed: #{monster.speed}, Armor Class: #{monster.armor_class}"
+        puts ""
+        puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+        puts " STR: #{monster.strength}, DEX: #{monster.dexterity}, CON: #{monster.constitution}, INT: #{monster.intelligence}, WIS: #{monster.wisdom}, CHA: #{monster.charisma}"
+        puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+        puts ""
+        puts "ACTIONS"
+        puts ""
+          if monster.actions != "nil"
+            one_line_cleaned_monster_objects = monster.actions.gsub(/[\[\]\\"]/, "")
+            one_line_cleaned_monster_objects.split("},").map do |one_line_monster_actions|
+            puts one_line_monster_actions
+            puts ""
+            end
+          else
+            puts "N/A"
+          end
+        puts "======================================================================"
+        puts ""
+      break
       elsif number_of_monsters == 2
+        counter = 0
         this_encounters_monsters = []
         number_of_monsters.times do
           monster = Monster.random_monster
-          this_encounters_monsters.push(monster.name)
+          this_encounters_monsters << Monster.random_monster
         end
-        puts "As you're sailing the sea, you suddenly encounter a #{this_encounters_monsters[0]} and a #{this_encounters_monsters[1]}."
+        puts ""
+          this_encounters_monsters.map do |monster_object|
+            if counter == 0
+            puts "======================================================================"
+            puts ""
+            puts "As you're sailing the sea, you suddenly encounter a #{monster_object.name}"
+            counter += 1
+            else
+            puts "and a #{monster_object.name}."
+            end
+          end
+        puts ""
+        this_encounters_monsters.map do |monster_object|
+          puts "======================================================================"
+          puts ""
+          puts "Name: #{monster_object.name}"
+          puts "Size: #{monster_object.size}"
+          puts "Hit Points: #{monster_object.hit_points}"
+          puts "Challenge Rating: #{monster_object.challenge_rating}"
+          puts "Speed: #{monster_object.speed}, Armor Class: #{monster_object.armor_class}"
+          puts ""
+          puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+          puts " STR: #{monster_object.strength}, DEX: #{monster_object.dexterity}, CON: #{monster_object.constitution}, INT: #{monster_object.intelligence}, WIS: #{monster_object.wisdom}, CHA: #{monster_object.charisma}"
+          puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+          puts ""
+          puts "ACTIONS"
+          puts ""
+            if monster_object.actions != "nil"
+              one_line_cleaned_monster_objects = monster_object.actions.gsub(/[\[\]\\"]/, "")
+              one_line_cleaned_monster_objects.split("},").map do |one_line_monster_actions|
+              puts one_line_monster_actions
+              puts ""
+              end
+            else
+              puts "N/A"
+            end
+          puts "======================================================================"
+          puts ""
+        end
         break
       else
+        counter_2 = 0
         this_encounters_monsters = []
         number_of_monsters.times do
           monster = Monster.random_monster
-          this_encounters_monsters.push(monster.name)
+          this_encounters_monsters.push(monster)
         end
-          last_monster = this_encounters_monsters.pop
-          i = 0
-          until i == this_encounters_monsters.length
-            this_encounters_monsters[i].prepend('a ')
-            i += 1
+        this_encounters_monsters.map do |monster_object|
+          if counter_2 == 0
+          puts "======================================================================"
+          puts ""
+          print "As you're sailing the sea, you suddenly encounter a #{monster_object.name},"
+          counter_2 += 1
+          elsif counter_2 == this_encounters_monsters.length - 1
+          print " and a #{monster_object.name}."
+          puts ""
+          else
+          print " a #{monster_object.name},"
+          counter_2 += 1
           end
-          all_but_last_monster = this_encounters_monsters.join(', ')
-          and_last_monster = ", and a #{last_monster}"
-          the_whole_shabang = all_but_last_monster + and_last_monster
-          puts "As you're sailing the sea, you suddenly encounter #{the_whole_shabang}."
+        end
+          this_encounters_monsters.map do |monster_object|
+            puts ""
+            puts "======================================================================"
+            puts ""
+            puts "Name: #{monster_object.name}"
+            puts "Size: #{monster_object.size}"
+            puts "Hit Points: #{monster_object.hit_points}"
+            puts "Challenge Rating: #{monster_object.challenge_rating}"
+            puts "Speed: #{monster_object.speed}, Armor Class: #{monster_object.armor_class}"
+            puts ""
+            puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+            puts " STR: #{monster_object.strength}, DEX: #{monster_object.dexterity}, CON: #{monster_object.constitution}, INT: #{monster_object.intelligence}, WIS: #{monster_object.wisdom}, CHA: #{monster_object.charisma}"
+            puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+            puts ""
+            puts "ACTIONS"
+            puts ""
+              if monster_object.actions != "nil"
+                one_line_cleaned_monster_objects = monster_object.actions.gsub(/[\[\]\\"]/, "")
+                one_line_cleaned_monster_objects.split("},").map do |one_line_monster_actions|
+                puts one_line_monster_actions
+                puts ""
+                end
+              else
+                puts "N/A"
+              end
+            puts "======================================================================"
+            puts ""
+          end
           break
       end
     end
@@ -373,36 +876,136 @@ class Encounter < ActiveRecord::Base
     loop do
       puts "How many monsters?"
       number_of_monsters = gets.chomp.to_i
-      if number_of_monsters.is_a?(Integer) && number_of_monsters < 1
+      if number_of_monsters < 1
         puts "Please enter a number greater than zero."
       elsif number_of_monsters == 1
         monster = Monster.random_monster
+        puts "======================================================================"
+        puts ""
         puts "As you're exploring the fortress, you suddenly encounter a #{monster.name}."
-        break
+        puts ""
+        puts "======================================================================"
+        puts ""
+        puts "Name: #{monster.name}"
+        puts "Size: #{monster.size}"
+        puts "Hit Points: #{monster.hit_points}"
+        puts "Challenge Rating: #{monster.challenge_rating}"
+        puts "Speed: #{monster.speed}, Armor Class: #{monster.armor_class}"
+        puts ""
+        puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+        puts " STR: #{monster.strength}, DEX: #{monster.dexterity}, CON: #{monster.constitution}, INT: #{monster.intelligence}, WIS: #{monster.wisdom}, CHA: #{monster.charisma}"
+        puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+        puts ""
+        puts "ACTIONS"
+        puts ""
+          if monster.actions != "nil"
+            one_line_cleaned_monster_objects = monster.actions.gsub(/[\[\]\\"]/, "")
+            one_line_cleaned_monster_objects.split("},").map do |one_line_monster_actions|
+            puts one_line_monster_actions
+            puts ""
+            end
+          else
+            puts "N/A"
+          end
+        puts "======================================================================"
+        puts ""
+      break
       elsif number_of_monsters == 2
+        counter = 0
         this_encounters_monsters = []
         number_of_monsters.times do
           monster = Monster.random_monster
-          this_encounters_monsters.push(monster.name)
+          this_encounters_monsters << Monster.random_monster
         end
-        puts "As you're exploring the fortress, you suddenly encounter a #{this_encounters_monsters[0]} and a #{this_encounters_monsters[1]}."
+        puts ""
+          this_encounters_monsters.map do |monster_object|
+            if counter == 0
+            puts "======================================================================"
+            puts ""
+            puts "As you're exploring the fortress, you suddenly encounter a #{monster_object.name}"
+            counter += 1
+            else
+            puts "and a #{monster_object.name}."
+            end
+          end
+        puts ""
+        this_encounters_monsters.map do |monster_object|
+          puts "======================================================================"
+          puts ""
+          puts "Name: #{monster_object.name}"
+          puts "Size: #{monster_object.size}"
+          puts "Hit Points: #{monster_object.hit_points}"
+          puts "Challenge Rating: #{monster_object.challenge_rating}"
+          puts "Speed: #{monster_object.speed}, Armor Class: #{monster_object.armor_class}"
+          puts ""
+          puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+          puts " STR: #{monster_object.strength}, DEX: #{monster_object.dexterity}, CON: #{monster_object.constitution}, INT: #{monster_object.intelligence}, WIS: #{monster_object.wisdom}, CHA: #{monster_object.charisma}"
+          puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+          puts ""
+          puts "ACTIONS"
+          puts ""
+            if monster_object.actions != "nil"
+              one_line_cleaned_monster_objects = monster_object.actions.gsub(/[\[\]\\"]/, "")
+              one_line_cleaned_monster_objects.split("},").map do |one_line_monster_actions|
+              puts one_line_monster_actions
+              puts ""
+              end
+            else
+              puts "N/A"
+            end
+          puts "======================================================================"
+          puts ""
+        end
         break
       else
+        counter_2 = 0
         this_encounters_monsters = []
         number_of_monsters.times do
           monster = Monster.random_monster
-          this_encounters_monsters.push(monster.name)
+          this_encounters_monsters.push(monster)
         end
-          last_monster = this_encounters_monsters.pop
-          i = 0
-          until i == this_encounters_monsters.length
-            this_encounters_monsters[i].prepend('a ')
-            i += 1
+        this_encounters_monsters.map do |monster_object|
+          if counter_2 == 0
+          puts "======================================================================"
+          puts ""
+          print "As you're exploring the fortress, you suddenly encounter a #{monster_object.name},"
+          counter_2 += 1
+          elsif counter_2 == this_encounters_monsters.length - 1
+          print " and a #{monster_object.name}."
+          puts ""
+          else
+          print " a #{monster_object.name},"
+          counter_2 += 1
           end
-          all_but_last_monster = this_encounters_monsters.join(', ')
-          and_last_monster = ", and a #{last_monster}"
-          the_whole_shabang = all_but_last_monster + and_last_monster
-          puts "As you're exploring the fortress, you suddenly encounter #{the_whole_shabang}."
+        end
+          this_encounters_monsters.map do |monster_object|
+            puts ""
+            puts "======================================================================"
+            puts ""
+            puts "Name: #{monster_object.name}"
+            puts "Size: #{monster_object.size}"
+            puts "Hit Points: #{monster_object.hit_points}"
+            puts "Challenge Rating: #{monster_object.challenge_rating}"
+            puts "Speed: #{monster_object.speed}, Armor Class: #{monster_object.armor_class}"
+            puts ""
+            puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+            puts " STR: #{monster_object.strength}, DEX: #{monster_object.dexterity}, CON: #{monster_object.constitution}, INT: #{monster_object.intelligence}, WIS: #{monster_object.wisdom}, CHA: #{monster_object.charisma}"
+            puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+            puts ""
+            puts "ACTIONS"
+            puts ""
+              if monster_object.actions != "nil"
+                one_line_cleaned_monster_objects = monster_object.actions.gsub(/[\[\]\\"]/, "")
+                one_line_cleaned_monster_objects.split("},").map do |one_line_monster_actions|
+                puts one_line_monster_actions
+                puts ""
+                end
+              else
+                puts "N/A"
+              end
+            puts "======================================================================"
+            puts ""
+          end
           break
       end
     end
@@ -412,36 +1015,136 @@ class Encounter < ActiveRecord::Base
     loop do
       puts "How many monsters?"
       number_of_monsters = gets.chomp.to_i
-      if number_of_monsters.is_a?(Integer) && number_of_monsters < 1
+      if number_of_monsters < 1
         puts "Please enter a number greater than zero."
       elsif number_of_monsters == 1
         monster = Monster.random_monster
+        puts "======================================================================"
+        puts ""
         puts "As you're traveling through a field, you suddenly encounter a #{monster.name}."
-        break
+        puts ""
+        puts "======================================================================"
+        puts ""
+        puts "Name: #{monster.name}"
+        puts "Size: #{monster.size}"
+        puts "Hit Points: #{monster.hit_points}"
+        puts "Challenge Rating: #{monster.challenge_rating}"
+        puts "Speed: #{monster.speed}, Armor Class: #{monster.armor_class}"
+        puts ""
+        puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+        puts " STR: #{monster.strength}, DEX: #{monster.dexterity}, CON: #{monster.constitution}, INT: #{monster.intelligence}, WIS: #{monster.wisdom}, CHA: #{monster.charisma}"
+        puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+        puts ""
+        puts "ACTIONS"
+        puts ""
+          if monster.actions != "nil"
+            one_line_cleaned_monster_objects = monster.actions.gsub(/[\[\]\\"]/, "")
+            one_line_cleaned_monster_objects.split("},").map do |one_line_monster_actions|
+            puts one_line_monster_actions
+            puts ""
+            end
+          else
+            puts "N/A"
+          end
+        puts "======================================================================"
+        puts ""
+      break
       elsif number_of_monsters == 2
+        counter = 0
         this_encounters_monsters = []
         number_of_monsters.times do
           monster = Monster.random_monster
-          this_encounters_monsters.push(monster.name)
+          this_encounters_monsters << Monster.random_monster
         end
-        puts "As you're traveling through a field, you suddenly encounter a #{this_encounters_monsters[0]} and a #{this_encounters_monsters[1]}."
+        puts ""
+          this_encounters_monsters.map do |monster_object|
+            if counter == 0
+            puts "======================================================================"
+            puts ""
+            puts "As you're traveling through a field, you suddenly encounter a #{monster_object.name}"
+            counter += 1
+            else
+            puts "and a #{monster_object.name}."
+            end
+          end
+        puts ""
+        this_encounters_monsters.map do |monster_object|
+          puts "======================================================================"
+          puts ""
+          puts "Name: #{monster_object.name}"
+          puts "Size: #{monster_object.size}"
+          puts "Hit Points: #{monster_object.hit_points}"
+          puts "Challenge Rating: #{monster_object.challenge_rating}"
+          puts "Speed: #{monster_object.speed}, Armor Class: #{monster_object.armor_class}"
+          puts ""
+          puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+          puts " STR: #{monster_object.strength}, DEX: #{monster_object.dexterity}, CON: #{monster_object.constitution}, INT: #{monster_object.intelligence}, WIS: #{monster_object.wisdom}, CHA: #{monster_object.charisma}"
+          puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+          puts ""
+          puts "ACTIONS"
+          puts ""
+            if monster_object.actions != "nil"
+              one_line_cleaned_monster_objects = monster_object.actions.gsub(/[\[\]\\"]/, "")
+              one_line_cleaned_monster_objects.split("},").map do |one_line_monster_actions|
+              puts one_line_monster_actions
+              puts ""
+              end
+            else
+              puts "N/A"
+            end
+          puts "======================================================================"
+          puts ""
+        end
         break
       else
+        counter_2 = 0
         this_encounters_monsters = []
         number_of_monsters.times do
           monster = Monster.random_monster
-          this_encounters_monsters.push(monster.name)
+          this_encounters_monsters.push(monster)
         end
-          last_monster = this_encounters_monsters.pop
-          i = 0
-          until i == this_encounters_monsters.length
-            this_encounters_monsters[i].prepend('a ')
-            i += 1
+        this_encounters_monsters.map do |monster_object|
+          if counter_2 == 0
+          puts "======================================================================"
+          puts ""
+          print "As you're traveling through a field, you suddenly encounter a #{monster_object.name},"
+          counter_2 += 1
+          elsif counter_2 == this_encounters_monsters.length - 1
+          print " and a #{monster_object.name}."
+          puts ""
+          else
+          print " a #{monster_object.name},"
+          counter_2 += 1
           end
-          all_but_last_monster = this_encounters_monsters.join(', ')
-          and_last_monster = ", and a #{last_monster}"
-          the_whole_shabang = all_but_last_monster + and_last_monster
-          puts "As you're traveling through a field, you suddenly encounter #{the_whole_shabang}."
+        end
+          this_encounters_monsters.map do |monster_object|
+            puts ""
+            puts "======================================================================"
+            puts ""
+            puts "Name: #{monster_object.name}"
+            puts "Size: #{monster_object.size}"
+            puts "Hit Points: #{monster_object.hit_points}"
+            puts "Challenge Rating: #{monster_object.challenge_rating}"
+            puts "Speed: #{monster_object.speed}, Armor Class: #{monster_object.armor_class}"
+            puts ""
+            puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+            puts " STR: #{monster_object.strength}, DEX: #{monster_object.dexterity}, CON: #{monster_object.constitution}, INT: #{monster_object.intelligence}, WIS: #{monster_object.wisdom}, CHA: #{monster_object.charisma}"
+            puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+            puts ""
+            puts "ACTIONS"
+            puts ""
+              if monster_object.actions != "nil"
+                one_line_cleaned_monster_objects = monster_object.actions.gsub(/[\[\]\\"]/, "")
+                one_line_cleaned_monster_objects.split("},").map do |one_line_monster_actions|
+                puts one_line_monster_actions
+                puts ""
+                end
+              else
+                puts "N/A"
+              end
+            puts "======================================================================"
+            puts ""
+          end
           break
       end
     end
@@ -451,40 +1154,142 @@ class Encounter < ActiveRecord::Base
     loop do
       puts "How many monsters?"
       number_of_monsters = gets.chomp.to_i
-      if number_of_monsters.is_a?(Integer) && number_of_monsters < 1
+      if number_of_monsters < 1
         puts "Please enter a number greater than zero."
       elsif number_of_monsters == 1
         monster = Monster.random_monster
+        puts "======================================================================"
+        puts ""
         puts "As you're exploring the volcano, you suddenly encounter a #{monster.name}."
-        break
+        puts ""
+        puts "======================================================================"
+        puts ""
+        puts "Name: #{monster.name}"
+        puts "Size: #{monster.size}"
+        puts "Hit Points: #{monster.hit_points}"
+        puts "Challenge Rating: #{monster.challenge_rating}"
+        puts "Speed: #{monster.speed}, Armor Class: #{monster.armor_class}"
+        puts ""
+        puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+        puts " STR: #{monster.strength}, DEX: #{monster.dexterity}, CON: #{monster.constitution}, INT: #{monster.intelligence}, WIS: #{monster.wisdom}, CHA: #{monster.charisma}"
+        puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+        puts ""
+        puts "ACTIONS"
+        puts ""
+          if monster.actions != "nil"
+            one_line_cleaned_monster_objects = monster.actions.gsub(/[\[\]\\"]/, "")
+            one_line_cleaned_monster_objects.split("},").map do |one_line_monster_actions|
+            puts one_line_monster_actions
+            puts ""
+            end
+          else
+            puts "N/A"
+          end
+        puts "======================================================================"
+        puts ""
+      break
       elsif number_of_monsters == 2
+        counter = 0
         this_encounters_monsters = []
         number_of_monsters.times do
           monster = Monster.random_monster
-          this_encounters_monsters.push(monster.name)
+          this_encounters_monsters << Monster.random_monster
         end
-        puts "As you're exploring the volcano, you suddenly encounter a #{this_encounters_monsters[0]} and a #{this_encounters_monsters[1]}."
+        puts ""
+          this_encounters_monsters.map do |monster_object|
+            if counter == 0
+            puts "======================================================================"
+            puts ""
+            puts "As you're exploring the volcano, you suddenly encounter a #{monster_object.name}"
+            counter += 1
+            else
+            puts "and a #{monster_object.name}."
+            end
+          end
+        puts ""
+        this_encounters_monsters.map do |monster_object|
+          puts "======================================================================"
+          puts ""
+          puts "Name: #{monster_object.name}"
+          puts "Size: #{monster_object.size}"
+          puts "Hit Points: #{monster_object.hit_points}"
+          puts "Challenge Rating: #{monster_object.challenge_rating}"
+          puts "Speed: #{monster_object.speed}, Armor Class: #{monster_object.armor_class}"
+          puts ""
+          puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+          puts " STR: #{monster_object.strength}, DEX: #{monster_object.dexterity}, CON: #{monster_object.constitution}, INT: #{monster_object.intelligence}, WIS: #{monster_object.wisdom}, CHA: #{monster_object.charisma}"
+          puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+          puts ""
+          puts "ACTIONS"
+          puts ""
+            if monster_object.actions != "nil"
+              one_line_cleaned_monster_objects = monster_object.actions.gsub(/[\[\]\\"]/, "")
+              one_line_cleaned_monster_objects.split("},").map do |one_line_monster_actions|
+              puts one_line_monster_actions
+              puts ""
+              end
+            else
+              puts "N/A"
+            end
+          puts "======================================================================"
+          puts ""
+        end
         break
       else
+        counter_2 = 0
         this_encounters_monsters = []
         number_of_monsters.times do
           monster = Monster.random_monster
-          this_encounters_monsters.push(monster.name)
+          this_encounters_monsters.push(monster)
         end
-          last_monster = this_encounters_monsters.pop
-          i = 0
-          until i == this_encounters_monsters.length
-            this_encounters_monsters[i].prepend('a ')
-            i += 1
+        this_encounters_monsters.map do |monster_object|
+          if counter_2 == 0
+          puts "======================================================================"
+          puts ""
+          print "As you're exploring the volcano, you suddenly encounter a #{monster_object.name},"
+          counter_2 += 1
+          elsif counter_2 == this_encounters_monsters.length - 1
+          print " and a #{monster_object.name}."
+          puts ""
+          else
+          print " a #{monster_object.name},"
+          counter_2 += 1
           end
-          all_but_last_monster = this_encounters_monsters.join(', ')
-          and_last_monster = ", and a #{last_monster}"
-          the_whole_shabang = all_but_last_monster + and_last_monster
-          puts "As you're exploring the volcano, you suddenly encounter #{the_whole_shabang}."
+        end
+          this_encounters_monsters.map do |monster_object|
+            puts ""
+            puts "======================================================================"
+            puts ""
+            puts "Name: #{monster_object.name}"
+            puts "Size: #{monster_object.size}"
+            puts "Hit Points: #{monster_object.hit_points}"
+            puts "Challenge Rating: #{monster_object.challenge_rating}"
+            puts "Speed: #{monster_object.speed}, Armor Class: #{monster_object.armor_class}"
+            puts ""
+            puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+            puts " STR: #{monster_object.strength}, DEX: #{monster_object.dexterity}, CON: #{monster_object.constitution}, INT: #{monster_object.intelligence}, WIS: #{monster_object.wisdom}, CHA: #{monster_object.charisma}"
+            puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+            puts ""
+            puts "ACTIONS"
+            puts ""
+              if monster_object.actions != "nil"
+                one_line_cleaned_monster_objects = monster_object.actions.gsub(/[\[\]\\"]/, "")
+                one_line_cleaned_monster_objects.split("},").map do |one_line_monster_actions|
+                puts one_line_monster_actions
+                puts ""
+                end
+              else
+                puts "N/A"
+              end
+            puts "======================================================================"
+            puts ""
+          end
           break
       end
     end
   end
+
+
 
 end
 
