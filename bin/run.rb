@@ -113,13 +113,6 @@ def run
         end
       end
 
-
-
-
-
-
-
-
     elsif input.downcase == "quit"
       break
     else
