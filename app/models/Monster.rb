@@ -3,8 +3,64 @@ class Monster < ActiveRecord::Base
   has_many :spells
   has_many :languages
 
+  def self.sizes
+    puts "Choose a monster size: Tiny, Small, Medium, Large, Huge, or Gargantuan"
+    while answer = gets.chomp
+      case answer.downcase
+      when "tiny"
+        Monster.tiny
+        break
+      when "small"
+        Monster.small
+        break
+      when "medium"
+        Monster.medium
+        break
+      when "large"
+        Monster.large
+        break
+      when "huge"
+        Monster.huge
+        break
+      when "gargantuan"
+        Monster.gargantuan
+        break
+      else
+      puts "Please enter a valid monster size."
+      end
+    end
+  end
+
 
 ### MONSTER GENERATORS BY DIFFICULTY ###
+
+def self.generate_random_monsters
+  puts "Choose a monster difficulty: Very Easy, Easy, Medium, Hard, Very Hard, or Impossible."
+    while answer = gets.chomp
+      case answer.downcase
+      when "very easy"
+        Monster.generate_very_easy_monsters(number_of_monsters=3)
+        break
+      when "easy"
+        Monster.generate_easy_monsters(number_of_monsters=3)
+        break
+      when "medium"
+        Monster.generate_medium_monsters(number_of_monsters=3)
+        break
+      when "hard"
+        Monster.generate_hard_monsters(number_of_monsters=3)
+        break
+      when "very hard"
+        Monster.generate_very_hard_monsters(number_of_monsters=3)
+        break
+      when "impossible"
+        Monster.generate_impossible_monsters(number_of_monsters=3)
+        break
+      else
+      puts "Please enter a valid monster difficulty."
+      end
+    end
+  end
 
   def self.generate_very_easy_monsters(number_of_monsters=0)
     if number_of_monsters == 0

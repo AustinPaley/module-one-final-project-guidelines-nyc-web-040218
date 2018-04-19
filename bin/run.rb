@@ -1,7 +1,7 @@
 require_relative '../config/environment'
 require 'pry'
 
-Encounter.new_random_encounter
+Monster.generate_random_monsters
 # Equipment.types
 
 # def run
