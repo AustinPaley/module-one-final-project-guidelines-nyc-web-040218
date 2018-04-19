@@ -1,8 +1,10 @@
 require_relative '../config/environment'
 require 'pry'
 
-Encounter.new_random_encounter
-Equipment.types
+
+Equipment.random_items_as_string
+#Encounter.new_random_encounter
+#Equipment.types
 
 # def run
 # puts "

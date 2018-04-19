@@ -4,7 +4,7 @@ class Encounter < ActiveRecord::Base
   has_many :spells, through: :monsters
 
   def self.new_random_encounter
-    array = ["swamp", "desert", "forest", "deep_woods", "cave", "at_sea", "fortress", "field", "volcano"]
+    array = ["swamp", "desert", "forest", "deep woods", "cave", "at sea", "fortress", "field", "volcano"]
     random_location = array.sample
     if random_location == "swamp"
       puts "You are in a #{random_location}."
@@ -15,13 +15,13 @@ class Encounter < ActiveRecord::Base
     elsif random_location == "forest"
       puts "You are in a #{random_location}."
       Encounter.new_forest_encounter
-    elsif random_location == "deep_woods"
+    elsif random_location == "deep woods"
       puts "You are in a #{random_location}."
       Encounter.new_deep_woods_encounter
     elsif random_location == "cave"
       puts "You are in a #{random_location}."
       Encounter.new_cave_encounter
-    elsif random_location == "at_sea"
+    elsif random_location == "at sea"
       puts "You are in a #{random_location}."
       Encounter.new_at_sea_encounter
     elsif random_location == "fortress"
@@ -42,7 +42,7 @@ class Encounter < ActiveRecord::Base
     loop do
       puts "How many monsters?"
       number_of_monsters = gets.chomp.to_i
-      if number_of_monsters.is_a?(Integer) && number_of_monsters < 1
+      if number_of_monsters < 1
         puts "Please enter a number greater than zero."
       elsif number_of_monsters == 1
         monster = Monster.random_monster
@@ -60,7 +60,7 @@ class Encounter < ActiveRecord::Base
         this_encounters_monsters = []
         number_of_monsters.times do
           monster = Monster.random_monster
-          this_encounters_monsters.push(monster.name)
+          this_encounters_monsters.push(monster)
         end
           last_monster = this_encounters_monsters.pop
           i = 0
@@ -69,7 +69,7 @@ class Encounter < ActiveRecord::Base
             i += 1
           end
           all_but_last_monster = this_encounters_monsters.join(', ')
-          and_last_monster = ", and a #{last_monster}"
+          and_last_monster = ", and a #{last_monster.name}"
           the_whole_shabang = all_but_last_monster + and_last_monster
           puts "As you're traveling through the swamp, you suddenly encounter #{the_whole_shabang}."
           break
@@ -390,3 +390,16 @@ class Encounter < ActiveRecord::Base
   end
 
 end
+
+
+  # this_encounters_items = []
+  # num_of_items = rand(1..4)
+  # num_of_items.times do
+  #   item = Equipment.random_item
+  #   this_encounters_items.push(item)
+  #
+  #   puts "The 'monster(s)' are carrying a 'items'. Players may collect these items if they are victorious."
+
+
+#ADD REWARD ITEMS IF Weapon
+#SPAWN monster instance and the details
