@@ -13,7 +13,34 @@ class Monster < ActiveRecord::Base
       very_easy_monsters = Monster.all.select do |monster_obj|
         monster_obj.challenge_rating < 1
       end
-      very_easy_monsters.sample(number_of_monsters)
+      very_easy_monsters.sample(number_of_monsters).map do |very_easy_monster_obj|
+
+        puts "======================================================================"
+        puts ""
+        puts "Name: #{very_easy_monster_obj.name}"
+        puts "Size: #{very_easy_monster_obj.size}"
+        puts "Hit Points: #{very_easy_monster_obj.hit_points}"
+        puts "Challenge Rating: #{very_easy_monster_obj.challenge_rating}"
+        puts "Speed: #{very_easy_monster_obj.speed}, Armor Class: #{very_easy_monster_obj.armor_class}"
+        puts ""
+        puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+        puts " STR: #{very_easy_monster_obj.strength}, DEX: #{very_easy_monster_obj.dexterity}, CON: #{very_easy_monster_obj.constitution}, INT: #{very_easy_monster_obj.intelligence}, WIS: #{very_easy_monster_obj.wisdom}, CHA: #{very_easy_monster_obj.charisma}"
+        puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+        puts ""
+        puts "ACTIONS"
+        puts ""
+          if very_easy_monster_obj.actions != "nil"
+            one_line_cleaned_monster_objects = very_easy_monster_obj.actions.gsub(/[\[\]\\"]/, "")
+            one_line_cleaned_monster_objects.split("},").map do |one_line_monster_actions|
+            puts one_line_monster_actions
+            puts ""
+            end
+          else
+            puts "N/A"
+          end
+        puts "======================================================================"
+        puts ""
+      end
     end
   end
 
@@ -22,9 +49,36 @@ class Monster < ActiveRecord::Base
       puts "Please enter how many monsters you would like."
     else
       easy_monsters = Monster.all.select do |monster_obj|
-        monster_obj.challenge_rating < 3
+        monster_obj.challenge_rating <= 3 && monster_obj.challenge_rating != 0
       end
-      easy_monsters.sample(number_of_monsters)
+      easy_monsters.sample(number_of_monsters).map do |easy_monster_obj|
+
+        puts "======================================================================"
+        puts ""
+        puts "Name: #{easy_monster_obj.name}"
+        puts "Size: #{easy_monster_obj.size}"
+        puts "Hit Points: #{easy_monster_obj.hit_points}"
+        puts "Challenge Rating: #{easy_monster_obj.challenge_rating}"
+        puts "Speed: #{easy_monster_obj.speed}, Armor Class: #{easy_monster_obj.armor_class}"
+        puts ""
+        puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+        puts " STR: #{easy_monster_obj.strength}, DEX: #{easy_monster_obj.dexterity}, CON: #{easy_monster_obj.constitution}, INT: #{easy_monster_obj.intelligence}, WIS: #{easy_monster_obj.wisdom}, CHA: #{easy_monster_obj.charisma}"
+        puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+        puts ""
+        puts "ACTIONS"
+        puts ""
+          if easy_monster_obj.actions != "nil"
+            one_line_cleaned_monster_objects = easy_monster_obj.actions.gsub(/[\[\]\\"]/, "")
+            one_line_cleaned_monster_objects.split("},").map do |one_line_monster_actions|
+            puts one_line_monster_actions
+            puts ""
+            end
+          else
+            puts "N/A"
+          end
+        puts "======================================================================"
+        puts ""
+      end
     end
   end
 
@@ -33,9 +87,36 @@ class Monster < ActiveRecord::Base
       puts "Please enter how many monsters you would like."
     else
       medium_monsters = Monster.all.select do |monster_obj|
-        monster_obj.challenge_rating > 3 && monster_obj.challenge_rating < 7
+        monster_obj.challenge_rating > 3 && monster_obj.challenge_rating <= 7
       end
-      medium_monsters.sample(number_of_monsters)
+      medium_monsters.sample(number_of_monsters).map do |medium_monster_obj|
+
+        puts "======================================================================"
+        puts ""
+        puts "Name: #{medium_monster_obj.name}"
+        puts "Size: #{medium_monster_obj.size}"
+        puts "Hit Points: #{medium_monster_obj.hit_points}"
+        puts "Challenge Rating: #{medium_monster_obj.challenge_rating}"
+        puts "Speed: #{medium_monster_obj.speed}, Armor Class: #{medium_monster_obj.armor_class}"
+        puts ""
+        puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+        puts " STR: #{medium_monster_obj.strength}, DEX: #{medium_monster_obj.dexterity}, CON: #{medium_monster_obj.constitution}, INT: #{medium_monster_obj.intelligence}, WIS: #{medium_monster_obj.wisdom}, CHA: #{medium_monster_obj.charisma}"
+        puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+        puts ""
+        puts "ACTIONS"
+        puts ""
+          if medium_monster_obj.actions != "nil"
+            one_line_cleaned_monster_objects = medium_monster_obj.actions.gsub(/[\[\]\\"]/, "")
+            one_line_cleaned_monster_objects.split("},").map do |one_line_monster_actions|
+            puts one_line_monster_actions
+            puts ""
+            end
+          else
+            puts "N/A"
+          end
+        puts "======================================================================"
+        puts ""
+      end
     end
   end
 
@@ -44,9 +125,36 @@ class Monster < ActiveRecord::Base
       puts "Please enter how many monsters you would like."
     else
       hard_monsters = Monster.all.select do |monster_obj|
-        monster_obj.challenge_rating > 7 && monster_obj.challenge_rating < 10
+        monster_obj.challenge_rating > 7 && monster_obj.challenge_rating <= 10
       end
-      hard_monsters.sample(number_of_monsters)
+      hard_monsters.sample(number_of_monsters).map do |hard_monster_obj|
+
+        puts "======================================================================"
+        puts ""
+        puts "Name: #{hard_monster_obj.name}"
+        puts "Size: #{hard_monster_obj.size}"
+        puts "Hit Points: #{hard_monster_obj.hit_points}"
+        puts "Challenge Rating: #{hard_monster_obj.challenge_rating}"
+        puts "Speed: #{hard_monster_obj.speed}, Armor Class: #{hard_monster_obj.armor_class}"
+        puts ""
+        puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+        puts " STR: #{hard_monster_obj.strength}, DEX: #{hard_monster_obj.dexterity}, CON: #{hard_monster_obj.constitution}, INT: #{hard_monster_obj.intelligence}, WIS: #{hard_monster_obj.wisdom}, CHA: #{hard_monster_obj.charisma}"
+        puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+        puts ""
+        puts "ACTIONS"
+        puts ""
+          if hard_monster_obj.actions != "nil"
+            one_line_cleaned_monster_objects = hard_monster_obj.actions.gsub(/[\[\]\\"]/, "")
+            one_line_cleaned_monster_objects.split("},").map do |one_line_monster_actions|
+            puts one_line_monster_actions
+            puts ""
+            end
+          else
+            puts "N/A"
+          end
+        puts "======================================================================"
+        puts ""
+      end
     end
   end
 
@@ -55,9 +163,36 @@ class Monster < ActiveRecord::Base
       puts "Please enter how many monsters you would like."
     else
       very_hard_monsters = Monster.all.select do |monster_obj|
-        monster_obj.challenge_rating > 10 && monster_obj.challenge_rating < 20
+        monster_obj.challenge_rating > 10 && monster_obj.challenge_rating <= 20
       end
-      very_hard_monsters.sample(number_of_monsters)
+      very_hard_monsters.sample(number_of_monsters).map do |very_hard_monster_obj|
+
+        puts "======================================================================"
+        puts ""
+        puts "Name: #{very_hard_monster_obj.name}"
+        puts "Size: #{very_hard_monster_obj.size}"
+        puts "Hit Points: #{very_hard_monster_obj.hit_points}"
+        puts "Challenge Rating: #{very_hard_monster_obj.challenge_rating}"
+        puts "Speed: #{very_hard_monster_obj.speed}, Armor Class: #{very_hard_monster_obj.armor_class}"
+        puts ""
+        puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+        puts " STR: #{very_hard_monster_obj.strength}, DEX: #{very_hard_monster_obj.dexterity}, CON: #{very_hard_monster_obj.constitution}, INT: #{very_hard_monster_obj.intelligence}, WIS: #{very_hard_monster_obj.wisdom}, CHA: #{very_hard_monster_obj.charisma}"
+        puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+        puts ""
+        puts "ACTIONS"
+        puts ""
+          if very_hard_monster_obj.actions != "nil"
+            one_line_cleaned_monster_objects = very_hard_monster_obj.actions.gsub(/[\[\]\\"]/, "")
+            one_line_cleaned_monster_objects.split("},").map do |one_line_monster_actions|
+            puts one_line_monster_actions
+            puts ""
+            end
+          else
+            puts "N/A"
+          end
+        puts "======================================================================"
+        puts ""
+      end
     end
   end
 
@@ -68,7 +203,34 @@ class Monster < ActiveRecord::Base
       impossible_monsters = Monster.all.select do |monster_obj|
         monster_obj.challenge_rating > 20 && monster_obj.challenge_rating <= 30
       end
-      impossible_monsters.sample(number_of_monsters)
+      impossible_monsters.sample(number_of_monsters).map do |impossible_monster_object|
+
+        puts "======================================================================"
+        puts ""
+        puts "Name: #{impossible_monster_object.name}"
+        puts "Size: #{impossible_monster_object.size}"
+        puts "Hit Points: #{impossible_monster_object.hit_points}"
+        puts "Challenge Rating: #{impossible_monster_object.challenge_rating}"
+        puts "Speed: #{impossible_monster_object.speed}, Armor Class: #{impossible_monster_object.armor_class}"
+        puts ""
+        puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+        puts " STR: #{impossible_monster_object.strength}, DEX: #{impossible_monster_object.dexterity}, CON: #{impossible_monster_object.constitution}, INT: #{impossible_monster_object.intelligence}, WIS: #{impossible_monster_object.wisdom}, CHA: #{impossible_monster_object.charisma}"
+        puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+        puts ""
+        puts "ACTIONS"
+        puts ""
+          if impossible_monster_object.actions != "nil"
+            one_line_cleaned_monster_objects = impossible_monster_object.actions.gsub(/[\[\]\\"]/, "")
+            one_line_cleaned_monster_objects.split("},").map do |one_line_monster_actions|
+            puts one_line_monster_actions
+            puts ""
+            end
+          else
+            puts "N/A"
+          end
+        puts "======================================================================"
+        puts ""
+      end
     end
   end
 

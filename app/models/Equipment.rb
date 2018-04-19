@@ -50,7 +50,7 @@ belongs_to :encounters
     armor = Equipment.all.select do |equipment_obj|
       equipment_obj["category"].downcase == "armor"
     end
-    armor.map do |equipment_obj|
+    sample = armor.map do |equipment_obj|
       puts ""
       puts "#{equipment_obj.name}"
       puts "Equipment Type: #{equipment_obj.category}"
