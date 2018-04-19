@@ -133,7 +133,7 @@ belongs_to :encounters
   end
 
   def self.find_item(name, category = false)
-    if category
+    if category.is_a?(String) && category != ""
       cat_format = category.tr(' ', '_').downcase
       if cat_format == "weapons"
         Equipment.weapons.select do |item|
