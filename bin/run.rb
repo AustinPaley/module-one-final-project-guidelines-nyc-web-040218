@@ -1,36 +1,34 @@
 require_relative '../config/environment'
 require 'pry'
-
-#Equipment.random_items_as_string
-#Encounter.new_random_encounter
-# Monster.sizes
-# Monster.generate_random_monsters
-# Equipment.types
-
+require 'tty'
+require 'tty-color'
 def run
-  puts "
+  pastel = Pastel.new
+  puts pastel.red("
 
-  #
-  #  @@@@@@@     @@@@@      @@@@@@@       @@@@@@   @@@  @@@   @@@@@@   @@@@@@@   @@@@@@@   @@@@@@@  @@@  @@@  @@@@@@@
-  #  @@@@@@@@   @@@@@@@     @@@@@@@@     @@@@@@@   @@@  @@@  @@@@@@@@  @@@@@@@@  @@@@@@@  @@@@@@@@  @@@  @@@  @@@@@@@
-  #  @@!  @@@  @@!   @@@    @@!  @@@     !@@       @@!  @@@  @@!  @@@  @@!  @@@    @@!    !@@       @@!  @@@    @@!
-  #  !@!  @!@   !@  @!@     !@!  @!@     !@!       !@!  @!@  !@!  @!@  !@!  @!@    !@!    !@!       !@!  @!@    !@!
-  #  @!@  !@!    @!@!@      @!@  !@!     !!@@!!    @!@!@!@!  @!@  !@!  @!@!!@!     @!!    !@!       @!@  !@!    @!!
-  #  !@!  !!!    !!!@  !!!  !@!  !!!      !!@!!!   !!!@!!!!  !@!  !!!  !!@!@!      !!!    !!!       !@!  !!!    !!!
-  #  !!:  !!!   !!:!!:!!:   !!:  !!!          !:!  !!:  !!!  !!:  !!!  !!: :!!     !!:    :!!       !!:  !!!    !!:
-  #  :!:  !:!  :!:  !:!:    :!:  !:!         !:!   :!:  !:!  :!:  !:!  :!:  !:!    :!:    :!:       :!:  !:!    :!:
-  #   :::: ::  ::: ::::::    :::: ::     :::: ::   ::   :::  ::::: ::  ::   :::     ::     ::: :::  ::::: ::     ::
-  #  :: :  :    ::: :: :::  :: :  :      :: : :     :   : :   : :  :    :   : :     :      :: :: :   : :  :      :
-  #
 
-  "
+    @@@@@@@     @@@@@      @@@@@@@       @@@@@@   @@@  @@@   @@@@@@   @@@@@@@   @@@@@@@   @@@@@@@  @@@  @@@  @@@@@@@
+    @@@@@@@@   @@@@@@@     @@@@@@@@     @@@@@@@   @@@  @@@  @@@@@@@@  @@@@@@@@  @@@@@@@  @@@@@@@@  @@@  @@@  @@@@@@@
+    @@!  @@@  @@!   @@@    @@!  @@@     !@@       @@!  @@@  @@!  @@@  @@!  @@@    @@!    !@@       @@!  @@@    @@!
+    !@!  @!@   !@  @!@     !@!  @!@     !@!       !@!  @!@  !@!  @!@  !@!  @!@    !@!    !@!       !@!  @!@    !@!
+    @!@  !@!    @!@!@      @!@  !@!     !!@@!!    @!@!@!@!  @!@  !@!  @!@!!@!     @!!    !@!       @!@  !@!    @!!
+    !@!  !!!    !!!@  !!!  !@!  !!!      !!@!!!   !!!@!!!!  !@!  !!!  !!@!@!      !!!    !!!       !@!  !!!    !!!
+    !!:  !!!   !!:!!:!!:   !!:  !!!          !:!  !!:  !!!  !!:  !!!  !!: :!!     !!:    :!!       !!:  !!!    !!:
+    :!:  !:!  :!:  !:!:    :!:  !:!         !:!   :!:  !:!  :!:  !:!  :!:  !:!    :!:    :!:       :!:  !:!    :!:
+     :::: ::  ::: ::::::    :::: ::     :::: ::   ::   :::  ::::: ::  ::   :::     ::     ::: :::  ::::: ::     ::
+    :: :  :    ::: :: :::  :: :  :      :: : :     :   : :   : :  :    :   : :     :      :: :: :   : :  :      :
+
+
+  ")
   puts "WELCOME TO D&D SHORTCUT! TO GET STARTED PLEASE SELECT FROM THE FOLLOWING OPTIONS:"
   loop do
     puts ""
-    puts "Encyclopedia"
-    puts "Encounter Generator"
-    puts "Item Generator"
-    puts "Quit"
+    puts pastel.red.bold("Encounter Generator")
+    puts pastel.red.bold("Random Monster Generator")
+    puts pastel.red.bold("Item Generator")
+    puts pastel.red.bold("Encyclopedia")
+    puts ""
+    puts pastel.red.bold.underline("Quit")
     input = gets.chomp
     if input.downcase == "encounter generator"
       loop do
@@ -92,13 +90,14 @@ def run
       end
     elsif input.downcase == "encyclopedia"
       loop do
-        puts "List items by type?"
-        puts "Find item by name?" #(and category)?"
+        puts "How would you like to find items?"
+        puts "By Type"
+        puts "By Name"
         input4 = gets.chomp
-        if input4.downcase == "list items by type"
+        if input4.downcase == "by type"
           Equipment.types_catalog
           break
-        elsif input4.downcase == "find item by name"
+        elsif input4.downcase == "by name"
           puts "What is the name of the item?"
           item = gets.chomp
         # puts "What is the item's category (optional)?"
@@ -112,16 +111,14 @@ def run
     elsif input.downcase == "item generator"
       loop do
         puts ""
-        puts "What would you like to do?"
+        puts "Would you like a specific or random number of items?"
         puts ""
-        puts "Create X number of random items?"
-        puts "Create random number of random items?"
         input3 = gets.chomp
-        if input3.downcase == "create x number of random items"
+        if input3.downcase == "specific number" || input3.downcase == "specific" || input3.downcase == "specific number"
           Equipment.random_items_as_string
           break
-        elsif input3.downcase == "create random number of random items"
-          Equipment.random_number_of_items_as_string
+        elsif input3.downcase == "random items" || input3.downcase == "random number" || input3.downcase == "random"
+          Equipment.item_generator
           break
         else
           puts "Please enter a valid command."
@@ -130,6 +127,11 @@ def run
 
     elsif input.downcase == "quit"
       break
+    elsif input.downcase == "random monster generator"
+    loop do
+      Monster.generate_random_monsters
+      break
+    end
     else
       puts "Please enter a valid option."
     end

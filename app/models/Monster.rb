@@ -42,7 +42,7 @@ def self.generate_random_monsters
         monster_obj.challenge_rating < 1
       end
       very_easy_monsters.sample(number_of_monsters).map do |very_easy_monster_obj|
-
+        puts ""
         puts "======================================================================"
         puts ""
         puts "Name: #{very_easy_monster_obj.name}"
@@ -80,7 +80,7 @@ def self.generate_random_monsters
         monster_obj.challenge_rating <= 3 && monster_obj.challenge_rating != 0
       end
       easy_monsters.sample(number_of_monsters).map do |easy_monster_obj|
-
+        puts ""
         puts "======================================================================"
         puts ""
         puts "Name: #{easy_monster_obj.name}"
@@ -118,7 +118,7 @@ def self.generate_random_monsters
         monster_obj.challenge_rating > 3 && monster_obj.challenge_rating <= 7
       end
       medium_monsters.sample(number_of_monsters).map do |medium_monster_obj|
-
+        puts ""
         puts "======================================================================"
         puts ""
         puts "Name: #{medium_monster_obj.name}"
@@ -156,7 +156,7 @@ def self.generate_random_monsters
         monster_obj.challenge_rating > 7 && monster_obj.challenge_rating <= 10
       end
       hard_monsters.sample(number_of_monsters).map do |hard_monster_obj|
-
+        puts ""
         puts "======================================================================"
         puts ""
         puts "Name: #{hard_monster_obj.name}"
@@ -194,7 +194,7 @@ def self.generate_random_monsters
         monster_obj.challenge_rating > 10 && monster_obj.challenge_rating <= 20
       end
       very_hard_monsters.sample(number_of_monsters).map do |very_hard_monster_obj|
-
+        puts ""
         puts "======================================================================"
         puts ""
         puts "Name: #{very_hard_monster_obj.name}"
@@ -232,7 +232,7 @@ def self.generate_random_monsters
         monster_obj.challenge_rating > 20 && monster_obj.challenge_rating <= 30
       end
       impossible_monsters.sample(number_of_monsters).map do |impossible_monster_object|
-
+        puts ""
         puts "======================================================================"
         puts ""
         puts "Name: #{impossible_monster_object.name}"

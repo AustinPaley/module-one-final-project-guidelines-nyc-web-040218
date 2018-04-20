@@ -163,17 +163,18 @@ class Equipment < ActiveRecord::Base
   end
 
   def self.random_number_of_items_as_string
+    pastel = Pastel.new
     this_encounters_items = []
     num_of_items = rand(1..4)
     if num_of_items == 1
       item = Equipment.random_item
-      puts "***If successful, your party finds a #{item.name}.***"
+      puts pastel.cyan.bold("***If successful, your party finds a #{item.name}.***")
     elsif num_of_items == 2
       num_of_items.times do
       item = Equipment.random_item
       this_encounters_items.push(item)
     end
-      puts "***If successful, your party finds a #{this_encounters_items[0].name} and a #{this_encounters_items[1].name}.***"
+      puts pastel.cyan.bold("***If successful, your party finds a #{this_encounters_items[0].name} and a #{this_encounters_items[1].name}.***")
     else
       num_of_items.times do
       item = Equipment.random_item
@@ -188,7 +189,7 @@ class Equipment < ActiveRecord::Base
       all_but_last_item = this_encounters_items.join(', ')
       and_last_item = ", and a #{last_item}"
       the_whole_shabang = all_but_last_item + and_last_item
-      puts "***If successful, your party finds #{the_whole_shabang}.***"
+      puts pastel.cyan.bold("***If successful, your party finds #{the_whole_shabang}.***")
     end
   end
 
@@ -227,6 +228,44 @@ class Equipment < ActiveRecord::Base
         and_last_item = ", and a #{last_item}"
         the_whole_shabang = all_but_last_item + and_last_item
         puts "You found a #{the_whole_shabang}."
+        break
+      end
+    end
+  end
+
+  def self.item_generator
+    loop do
+    number_of_items = rand(1..4)
+      if number_of_items < 1
+        puts "Please enter a number greater than zero."
+      elsif number_of_items == 1
+        item = Equipment.random_item
+        puts "Your party finds a #{item.name}."
+        break
+      elsif number_of_items == 2
+        this_encounters_items = []
+        number_of_items.times do
+          item = Equipment.random_item
+          this_encounters_items.push(item)
+        end
+        puts "Your party finds a #{this_encounters_items[0].name} and a #{this_encounters_items[1].name}."
+        break
+      else
+        this_encounters_items = []
+        number_of_items.times do
+          item = Equipment.random_item
+          this_encounters_items.push(item.name)
+        end
+        last_item = this_encounters_items.pop
+        i = 0
+        until i == this_encounters_items.length
+          this_encounters_items[i].prepend('a ')
+          i += 1
+        end
+        all_but_last_item = this_encounters_items.join(', ')
+        and_last_item = ", and a #{last_item}"
+        the_whole_shabang = all_but_last_item + and_last_item
+        puts "Your party finds a #{the_whole_shabang}."
         break
       end
     end

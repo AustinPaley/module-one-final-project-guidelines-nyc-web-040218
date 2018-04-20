@@ -4,40 +4,41 @@ class Encounter < ActiveRecord::Base
   has_many :spells, through: :monsters
 
   def self.new_random_encounter
+    pastel = Pastel.new
     array = ["swamp", "desert", "forest", "deep woods", "cave", "at sea", "fortress", "field", "volcano", "dungeon", "ruins"]
     random_location = array.sample
     if random_location == "swamp"
-      puts "You are in a #{random_location}."
+      puts pastel.green.on_black.bold("You are in a #{random_location}.")
       Encounter.new_swamp_encounter
     elsif random_location == "desert"
-      puts "You are in a #{random_location}."
+      puts pastel.green.on_black.bold("You are in a #{random_location}.")
       Encounter.new_desert_encounter
     elsif random_location == "forest"
-      puts "You are in a #{random_location}."
+      puts pastel.green.on_black.bold("You are in a #{random_location}.")
       Encounter.new_forest_encounter
     elsif random_location == "deep woods"
-      puts "You are in a #{random_location}."
+      puts pastel.green.on_black.bold("You are in a #{random_location}.")
       Encounter.new_deep_woods_encounter
     elsif random_location == "cave"
-      puts "You are in a #{random_location}."
+      puts pastel.green.on_black.bold("You are in a #{random_location}.")
       Encounter.new_cave_encounter
     elsif random_location == "at sea"
-      puts "You are in a #{random_location}."
+      puts pastel.green.on_black.bold("You are #{random_location}.")
       Encounter.new_at_sea_encounter
     elsif random_location == "fortress"
-      puts "You are in a #{random_location}."
+      puts pastel.green.on_black.bold("You are in a #{random_location}.")
       Encounter.new_fortress_encounter
     elsif random_location == "field"
-      puts "You are in a #{random_location}."
+      puts pastel.green.on_black.bold("You are in a #{random_location}.")
       Encounter.new_field_encounter
     elsif random_location == "volcano"
-      puts "You are in a #{random_location}."
+      puts pastel.green.on_black.bold("You are in a #{random_location}.")
       Encounter.new_volcano_encounter
     elsif random_location == "dungeon"
-      puts "You are in a #{random_location}."
+      puts pastel.green.on_black.bold("You are in a #{random_location}.")
       Encounter.new_dungeon_encounter
     elsif random_location == "ruins"
-      puts "You come upon some #{random_location}."
+      puts pastel.green.on_black.bold("You come upon some #{random_location}.")
       Encounter.new_ruins_encounter
     end
   end
@@ -45,6 +46,7 @@ class Encounter < ActiveRecord::Base
   # *** ENCOUNTERS WITH MONSTERS IN CERTAIN LOCATIONS ***
 
   def self.new_swamp_encounter
+    pastel = Pastel.new
     loop do
       puts "How many monsters?"
       number_of_monsters = gets.chomp.to_i
@@ -54,7 +56,8 @@ class Encounter < ActiveRecord::Base
         monster = Monster.random_monster
         puts "======================================================================"
         puts ""
-        puts "As you're traveling through the swamp, you suddenly encounter a #{monster.name}."
+        print pastel.red.bold("As you're traveling through the swamp, you suddenly encounter a #{monster.name}.")
+        puts ""
         puts ""
         puts "#{Equipment.random_number_of_items_as_string}"
         puts "======================================================================"
@@ -95,13 +98,14 @@ class Encounter < ActiveRecord::Base
             if counter == 0
             puts "======================================================================"
             puts ""
-            puts "As you're traveling through the swamp, you suddenly encounter a #{monster_object.name}"
+            print pastel.red.bold("As you're traveling through the swamp, you suddenly encounter a #{monster_object.name}")
             puts ""
             counter += 1
             else
-            puts "and a #{monster_object.name}."
+            print pastel.red.bold("and a #{monster_object.name}.")
             end
           end
+        puts ""
         puts ""
         puts "#{Equipment.random_number_of_items_as_string}"
         this_encounters_monsters.map do |monster_object|
@@ -143,13 +147,13 @@ class Encounter < ActiveRecord::Base
           if counter_2 == 0
           puts "======================================================================"
           puts ""
-          print "As you're traveling through the swamp, you suddenly encounter a #{monster_object.name},"
+          print pastel.red.bold("As you're traveling through the swamp, you suddenly encounter a #{monster_object.name},")
           counter_2 += 1
           elsif counter_2 == this_encounters_monsters.length - 1
-          print " and a #{monster_object.name}."
+          print pastel.red.bold(" and a #{monster_object.name}.")
           puts ""
           else
-          print " a #{monster_object.name},"
+          print pastel.red.bold(" a #{monster_object.name},")
           counter_2 += 1
           end
         end
@@ -188,6 +192,7 @@ class Encounter < ActiveRecord::Base
   end
 
   def self.new_desert_encounter
+        pastel = Pastel.new
     loop do
       puts "How many monsters?"
       number_of_monsters = gets.chomp.to_i
@@ -197,7 +202,8 @@ class Encounter < ActiveRecord::Base
         monster = Monster.random_monster
         puts "======================================================================"
         puts ""
-        puts "As you're traveling through the desert, you suddenly encounter a #{monster.name}."
+        print pastel.red.bold("As you're traveling through the desert, you suddenly encounter a #{monster.name}.")
+        puts ""
         puts ""
         puts "#{Equipment.random_number_of_items_as_string}"
         puts "======================================================================"
@@ -238,12 +244,13 @@ class Encounter < ActiveRecord::Base
             if counter == 0
             puts "======================================================================"
             puts ""
-            puts "As you're traveling through the desert, you suddenly encounter a #{monster_object.name}"
+            print pastel.red.bold("As you're traveling through the desert, you suddenly encounter a #{monster_object.name}")
             counter += 1
             else
-            puts "and a #{monster_object.name}."
+            print pastel.red.bold("and a #{monster_object.name}.")
             end
           end
+          puts ""
           puts ""
           puts "#{Equipment.random_number_of_items_as_string}"
         this_encounters_monsters.map do |monster_object|
@@ -285,13 +292,13 @@ class Encounter < ActiveRecord::Base
           if counter_2 == 0
           puts "======================================================================"
           puts ""
-          print "As you're traveling through the desert, you suddenly encounter a #{monster_object.name},"
+          print pastel.red.bold("As you're traveling through the desert, you suddenly encounter a #{monster_object.name},")
           counter_2 += 1
           elsif counter_2 == this_encounters_monsters.length - 1
-          print " and a #{monster_object.name}."
+          print pastel.red.bold(" and a #{monster_object.name}.")
           puts ""
           else
-          print " a #{monster_object.name},"
+          print pastel.red.bold(" a #{monster_object.name},")
           counter_2 += 1
           end
         end
@@ -330,6 +337,7 @@ class Encounter < ActiveRecord::Base
   end
 
   def self.new_forest_encounter
+        pastel = Pastel.new
     loop do
       puts "How many monsters?"
       number_of_monsters = gets.chomp.to_i
@@ -339,7 +347,8 @@ class Encounter < ActiveRecord::Base
         monster = Monster.random_monster
         puts "======================================================================"
         puts ""
-        puts "As you're traveling through the forest, you suddenly encounter a #{monster.name}."
+        print pastel.red.bold("As you're traveling through the forest, you suddenly encounter a #{monster.name}.")
+        puts ""
         puts ""
         puts "#{Equipment.random_number_of_items_as_string}"
         puts "======================================================================"
@@ -380,12 +389,13 @@ class Encounter < ActiveRecord::Base
             if counter == 0
             puts "======================================================================"
             puts ""
-            puts "As you're traveling through the forest, you suddenly encounter a #{monster_object.name}"
+            print pastel.red.bold("As you're traveling through the forest, you suddenly encounter a #{monster_object.name}")
             counter += 1
             else
-            puts "and a #{monster_object.name}."
+            print pastel.red.bold("and a #{monster_object.name}.")
             end
           end
+          puts ""
           puts ""
           puts "#{Equipment.random_number_of_items_as_string}"
         this_encounters_monsters.map do |monster_object|
@@ -427,13 +437,13 @@ class Encounter < ActiveRecord::Base
           if counter_2 == 0
           puts "======================================================================"
           puts ""
-          print "As you're traveling through the forest, you suddenly encounter a #{monster_object.name},"
+          print pastel.red.bold("As you're traveling through the forest, you suddenly encounter a #{monster_object.name},")
           counter_2 += 1
           elsif counter_2 == this_encounters_monsters.length - 1
-          print " and a #{monster_object.name}."
+          print pastel.red.bold(" and a #{monster_object.name}.")
           puts ""
           else
-          print " a #{monster_object.name},"
+          print pastel.red.bold(" a #{monster_object.name},")
           counter_2 += 1
           end
         end
@@ -472,6 +482,7 @@ class Encounter < ActiveRecord::Base
   end
 
   def self.new_deep_woods_encounter
+        pastel = Pastel.new
     loop do
       puts "How many monsters?"
       number_of_monsters = gets.chomp.to_i
@@ -481,7 +492,8 @@ class Encounter < ActiveRecord::Base
         monster = Monster.random_monster
         puts "======================================================================"
         puts ""
-        puts "As you're traveling through the deep woods, you suddenly encounter a #{monster.name}."
+        print pastel.red.bold("As you're traveling through the deep woods, you suddenly encounter a #{monster.name}.")
+        puts ""
         puts ""
         puts "#{Equipment.random_number_of_items_as_string}"
         puts "======================================================================"
@@ -522,12 +534,13 @@ class Encounter < ActiveRecord::Base
             if counter == 0
             puts "======================================================================"
             puts ""
-            puts "As you're traveling through the deep woods, you suddenly encounter a #{monster_object.name}"
+            print pastel.red.bold("As you're traveling through the deep woods, you suddenly encounter a #{monster_object.name}")
             counter += 1
             else
-            puts "and a #{monster_object.name}."
+            print pastel.red.bold("and a #{monster_object.name}.")
             end
           end
+          puts ""
           puts ""
           puts "#{Equipment.random_number_of_items_as_string}"
         this_encounters_monsters.map do |monster_object|
@@ -569,13 +582,13 @@ class Encounter < ActiveRecord::Base
           if counter_2 == 0
           puts "======================================================================"
           puts ""
-          print "As you're traveling through the deep woods, you suddenly encounter a #{monster_object.name},"
+          print pastel.red.bold("As you're traveling through the deep woods, you suddenly encounter a #{monster_object.name},")
           counter_2 += 1
           elsif counter_2 == this_encounters_monsters.length - 1
-          print " and a #{monster_object.name}."
+          print pastel.red.bold(" and a #{monster_object.name}.")
           puts ""
           else
-          print " a #{monster_object.name},"
+          print pastel.red.bold(" a #{monster_object.name},")
           counter_2 += 1
           end
         end
@@ -614,6 +627,7 @@ class Encounter < ActiveRecord::Base
   end
 
   def self.new_cave_encounter
+        pastel = Pastel.new
     loop do
       puts "How many monsters?"
       number_of_monsters = gets.chomp.to_i
@@ -623,7 +637,8 @@ class Encounter < ActiveRecord::Base
         monster = Monster.random_monster
         puts "======================================================================"
         puts ""
-        puts "As you're traveling through a cave, you suddenly encounter a #{monster.name}."
+        print pastel.red.bold("As you're traveling through a cave, you suddenly encounter a #{monster.name}.")
+        puts ""
         puts ""
         puts "#{Equipment.random_number_of_items_as_string}"
         puts "======================================================================"
@@ -664,12 +679,13 @@ class Encounter < ActiveRecord::Base
             if counter == 0
             puts "======================================================================"
             puts ""
-            puts "As you're traveling through a cave, you suddenly encounter a #{monster_object.name}"
+            print pastel.red.bold("As you're traveling through a cave, you suddenly encounter a #{monster_object.name}")
             counter += 1
             else
-            puts "and a #{monster_object.name}."
+            print pastel.red.bold("and a #{monster_object.name}.")
             end
           end
+          puts ""
           puts ""
           puts "#{Equipment.random_number_of_items_as_string}"
         this_encounters_monsters.map do |monster_object|
@@ -711,13 +727,13 @@ class Encounter < ActiveRecord::Base
           if counter_2 == 0
           puts "======================================================================"
           puts ""
-          print "As you're traveling through a cave, you suddenly encounter a #{monster_object.name},"
+          print pastel.red.bold("As you're traveling through a cave, you suddenly encounter a #{monster_object.name},")
           counter_2 += 1
           elsif counter_2 == this_encounters_monsters.length - 1
-          print " and a #{monster_object.name}."
+          print pastel.red.bold(" and a #{monster_object.name}.")
           puts ""
           else
-          print " a #{monster_object.name},"
+          print pastel.red.bold(" a #{monster_object.name},")
           counter_2 += 1
           end
         end
@@ -756,6 +772,7 @@ class Encounter < ActiveRecord::Base
   end
 
   def self.new_at_sea_encounter
+        pastel = Pastel.new
     loop do
       puts "How many monsters?"
       number_of_monsters = gets.chomp.to_i
@@ -765,7 +782,8 @@ class Encounter < ActiveRecord::Base
         monster = Monster.random_monster
         puts "======================================================================"
         puts ""
-        puts "As you're sailing the sea, you suddenly encounter a #{monster.name}."
+        print pastel.red.bold("As you're sailing the sea, you suddenly encounter a #{monster.name}.")
+        puts ""
         puts ""
         puts "#{Equipment.random_number_of_items_as_string}"
         puts "======================================================================"
@@ -806,12 +824,13 @@ class Encounter < ActiveRecord::Base
             if counter == 0
             puts "======================================================================"
             puts ""
-            puts "As you're sailing the sea, you suddenly encounter a #{monster_object.name}"
+            print pastel.red.bold("As you're sailing the sea, you suddenly encounter a #{monster_object.name}")
             counter += 1
             else
-            puts "and a #{monster_object.name}."
+            print pastel.red.bold(" and a #{monster_object.name}.")
             end
           end
+          puts ""
           puts ""
           puts "#{Equipment.random_number_of_items_as_string}"
         this_encounters_monsters.map do |monster_object|
@@ -853,13 +872,13 @@ class Encounter < ActiveRecord::Base
           if counter_2 == 0
           puts "======================================================================"
           puts ""
-          print "As you're sailing the sea, you suddenly encounter a #{monster_object.name},"
+          print pastel.red.bold("As you're sailing the sea, you suddenly encounter a #{monster_object.name},")
           counter_2 += 1
           elsif counter_2 == this_encounters_monsters.length - 1
-          print " and a #{monster_object.name}."
+          print pastel.red.bold(" and a #{monster_object.name}.")
           puts ""
           else
-          print " a #{monster_object.name},"
+          print pastel.red.bold(" a #{monster_object.name},")
           counter_2 += 1
           end
         end
@@ -898,6 +917,7 @@ class Encounter < ActiveRecord::Base
   end
 
   def self.new_fortress_encounter
+        pastel = Pastel.new
     loop do
       puts "How many monsters?"
       number_of_monsters = gets.chomp.to_i
@@ -907,7 +927,8 @@ class Encounter < ActiveRecord::Base
         monster = Monster.random_monster
         puts "======================================================================"
         puts ""
-        puts "As you're exploring the fortress, you suddenly encounter a #{monster.name}."
+        print pastel.red.bold("As you're exploring the fortress, you suddenly encounter a #{monster.name}.")
+        puts ""
         puts ""
         puts "#{Equipment.random_number_of_items_as_string}"
         puts "======================================================================"
@@ -948,12 +969,13 @@ class Encounter < ActiveRecord::Base
             if counter == 0
             puts "======================================================================"
             puts ""
-            puts "As you're exploring the fortress, you suddenly encounter a #{monster_object.name}"
+            print pastel.red.bold("As you're exploring the fortress, you suddenly encounter a #{monster_object.name}")
             counter += 1
             else
-            puts "and a #{monster_object.name}."
+            print pastel.red.bold("and a #{monster_object.name}.")
             end
           end
+          puts ""
           puts ""
           puts "#{Equipment.random_number_of_items_as_string}"
         this_encounters_monsters.map do |monster_object|
@@ -995,13 +1017,13 @@ class Encounter < ActiveRecord::Base
           if counter_2 == 0
           puts "======================================================================"
           puts ""
-          print "As you're exploring the fortress, you suddenly encounter a #{monster_object.name},"
+          print pastel.red.bold("As you're exploring the fortress, you suddenly encounter a #{monster_object.name},")
           counter_2 += 1
           elsif counter_2 == this_encounters_monsters.length - 1
-          print " and a #{monster_object.name}."
+          print pastel.red.bold(" and a #{monster_object.name}.")
           puts ""
           else
-          print " a #{monster_object.name},"
+          print pastel.red.bold(" a #{monster_object.name},")
           counter_2 += 1
           end
         end
@@ -1040,6 +1062,7 @@ class Encounter < ActiveRecord::Base
   end
 
   def self.new_field_encounter
+        pastel = Pastel.new
     loop do
       puts "How many monsters?"
       number_of_monsters = gets.chomp.to_i
@@ -1049,7 +1072,8 @@ class Encounter < ActiveRecord::Base
         monster = Monster.random_monster
         puts "======================================================================"
         puts ""
-        puts "As you're traveling through a field, you suddenly encounter a #{monster.name}."
+        print pastel.red.bold("As you're traveling through a field, you suddenly encounter a #{monster.name}.")
+        puts ""
         puts ""
         puts "#{Equipment.random_number_of_items_as_string}"
         puts "======================================================================"
@@ -1090,12 +1114,13 @@ class Encounter < ActiveRecord::Base
             if counter == 0
             puts "======================================================================"
             puts ""
-            puts "As you're traveling through a field, you suddenly encounter a #{monster_object.name}"
+            print pastel.red.bold("As you're traveling through a field, you suddenly encounter a #{monster_object.name}")
             counter += 1
             else
-            puts "and a #{monster_object.name}."
+            print pastel.red.bold("and a #{monster_object.name}.")
             end
           end
+          puts ""
           puts ""
           puts "#{Equipment.random_number_of_items_as_string}"
         this_encounters_monsters.map do |monster_object|
@@ -1137,13 +1162,13 @@ class Encounter < ActiveRecord::Base
           if counter_2 == 0
           puts "======================================================================"
           puts ""
-          print "As you're traveling through a field, you suddenly encounter a #{monster_object.name},"
+          print pastel.red.bold("As you're traveling through a field, you suddenly encounter a #{monster_object.name},")
           counter_2 += 1
           elsif counter_2 == this_encounters_monsters.length - 1
-          print " and a #{monster_object.name}."
+          print pastel.red.bold(" and a #{monster_object.name}.")
           puts ""
           else
-          print " a #{monster_object.name},"
+          print pastel.red.bold(" a #{monster_object.name},")
           counter_2 += 1
           end
         end
@@ -1182,6 +1207,7 @@ class Encounter < ActiveRecord::Base
   end
 
   def self.new_volcano_encounter
+        pastel = Pastel.new
     loop do
       puts "How many monsters?"
       number_of_monsters = gets.chomp.to_i
@@ -1191,7 +1217,8 @@ class Encounter < ActiveRecord::Base
         monster = Monster.random_monster
         puts "======================================================================"
         puts ""
-        puts "As you're exploring the volcano, you suddenly encounter a #{monster.name}."
+        print pastel.red.bold("As you're exploring the volcano, you suddenly encounter a #{monster.name}.")
+        puts ""
         puts ""
         puts "#{Equipment.random_number_of_items_as_string}"
         puts "======================================================================"
@@ -1232,12 +1259,13 @@ class Encounter < ActiveRecord::Base
             if counter == 0
             puts "======================================================================"
             puts ""
-            puts "As you're exploring the volcano, you suddenly encounter a #{monster_object.name}"
+            print pastel.red.bold("As you're exploring the volcano, you suddenly encounter a #{monster_object.name}")
             counter += 1
             else
-            puts "and a #{monster_object.name}."
+            print pastel.red.bold("and a #{monster_object.name}.")
             end
           end
+          puts ""
           puts ""
           puts "#{Equipment.random_number_of_items_as_string}"
         this_encounters_monsters.map do |monster_object|
@@ -1279,13 +1307,13 @@ class Encounter < ActiveRecord::Base
           if counter_2 == 0
           puts "======================================================================"
           puts ""
-          print "As you're exploring the volcano, you suddenly encounter a #{monster_object.name},"
+          print pastel.red.bold("As you're exploring the volcano, you suddenly encounter a #{monster_object.name},")
           counter_2 += 1
           elsif counter_2 == this_encounters_monsters.length - 1
-          print " and a #{monster_object.name}."
+          print pastel.red.bold(" and a #{monster_object.name}.")
           puts ""
           else
-          print " a #{monster_object.name},"
+          print pastel.red.bold(" a #{monster_object.name},")
           counter_2 += 1
           end
         end
@@ -1324,6 +1352,7 @@ class Encounter < ActiveRecord::Base
   end
 
   def self.new_dungeon_encounter
+        pastel = Pastel.new
     loop do
       puts "How many monsters?"
       number_of_monsters = gets.chomp.to_i
@@ -1333,7 +1362,8 @@ class Encounter < ActiveRecord::Base
         monster = Monster.random_monster
         puts "======================================================================"
         puts ""
-        puts "After being misidentified as a band of criminals, your party finds itself in a dungeon reserved for the most terrible creatures in the land. Soon after arriving, a large fire accidentally breaks out, giving the party a window of opportunity to escape. However, in order to get out of the prison alive, the party has to successfully defeat a #{monster.name}."
+        print pastel.red.bold("After being misidentified as a band of criminals, your party finds itself in a dungeon reserved for the most terrible creatures in the land. Soon after arriving, a large fire accidentally breaks out, giving the party a window of opportunity to escape. However, in order to get out of the prison alive, the party has to successfully defeat a #{monster.name}.")
+        puts ""
         puts ""
         puts "#{Equipment.random_number_of_items_as_string}"
         puts "======================================================================"
@@ -1374,12 +1404,13 @@ class Encounter < ActiveRecord::Base
             if counter == 0
             puts "======================================================================"
             puts ""
-            puts "After being misidentified as a band of criminals, your party finds itself in a dungeon reserved for the most terrible creatures in the land. Soon after arriving, a large fire accidentally breaks out, giving the party a window of opportunity to escape. However, in order to get out of the prison alive, the party has to successfully defeat a #{monster_object.name}"
+            print pastel.red.bold("After being misidentified as a band of criminals, your party finds itself in a dungeon reserved for the most terrible creatures in the land. Soon after arriving, a large fire accidentally breaks out, giving the party a window of opportunity to escape. However, in order to get out of the prison alive, the party has to successfully defeat a #{monster_object.name}")
             counter += 1
             else
-            puts "and a #{monster_object.name}."
+            print pastel.red.bold("and a #{monster_object.name}.")
             end
           end
+          puts ""
           puts ""
           puts "#{Equipment.random_number_of_items_as_string}"
         this_encounters_monsters.map do |monster_object|
@@ -1421,13 +1452,13 @@ class Encounter < ActiveRecord::Base
           if counter_2 == 0
           puts "======================================================================"
           puts ""
-          print "After being misidentified as a band of criminals, your party finds itself in a dungeon reserved for the most terrible creatures in the land. Soon after arriving, a large fire accidentally breaks out, giving the party a window of opportunity to escape. However, in order to get out of the prison alive, the party has to successfully defeat a #{monster_object.name},"
+          print pastel.red.bold("After being misidentified as a band of criminals, your party finds itself in a dungeon reserved for the most terrible creatures in the land. Soon after arriving, a large fire accidentally breaks out, giving the party a window of opportunity to escape. However, in order to get out of the prison alive, the party has to successfully defeat a #{monster_object.name},")
           counter_2 += 1
           elsif counter_2 == this_encounters_monsters.length - 1
-          print " and a #{monster_object.name}."
+          print pastel.red.bold(" and a #{monster_object.name}.")
           puts ""
           else
-          print " a #{monster_object.name},"
+          print pastel.red.bold(" a #{monster_object.name},")
           counter_2 += 1
           end
         end
@@ -1466,6 +1497,7 @@ class Encounter < ActiveRecord::Base
   end
 
   def self.new_ruins_encounter
+        pastel = Pastel.new
     loop do
       puts "How many monsters?"
       number_of_monsters = gets.chomp.to_i
@@ -1475,7 +1507,8 @@ class Encounter < ActiveRecord::Base
         monster = Monster.random_monster
         puts "======================================================================"
         puts ""
-        puts "After a long journey your party comes upon some old ruins in a forest. Settling down to make camp for the night, you soon realize that your party is not alone. Before you can fully prepare, you are set upon by a #{monster.name}."
+        print pastel.red.bold("After a long journey your party comes upon some old ruins in a forest. Settling down to make camp for the night, you soon realize that your party is not alone. Before you can fully prepare, you are set upon by a #{monster.name}.")
+        puts ""
         puts ""
         puts "#{Equipment.random_number_of_items_as_string}"
         puts "======================================================================"
@@ -1516,12 +1549,13 @@ class Encounter < ActiveRecord::Base
             if counter == 0
             puts "======================================================================"
             puts ""
-            puts "After a long journey your party comes upon some old ruins in a forest. Settling down to make camp for the night, you soon realize that your party is not alone. Before you can fully prepare, you are set upon by a #{monster_object.name}"
+            print pastel.red.bold("After a long journey your party comes upon some old ruins in a forest. Settling down to make camp for the night, you soon realize that your party is not alone. Before you can fully prepare, you are set upon by a #{monster_object.name}")
             counter += 1
             else
-            puts "and a #{monster_object.name}."
+            print pastel.red.bold("and a #{monster_object.name}.")
             end
           end
+          puts ""
           puts ""
           puts "#{Equipment.random_number_of_items_as_string}"
         this_encounters_monsters.map do |monster_object|
@@ -1563,13 +1597,13 @@ class Encounter < ActiveRecord::Base
           if counter_2 == 0
           puts "======================================================================"
           puts ""
-          print "	After a long journey your party comes upon some old ruins in a forest. Settling down to make camp for the night, you soon realize that your party is not alone. Before you can fully prepare, you are set upon by a #{monster_object.name},"
+          print pastel.red.bold("After a long journey your party comes upon some old ruins in a forest. Settling down to make camp for the night, you soon realize that your party is not alone. Before you can fully prepare, you are set upon by a #{monster_object.name},")
           counter_2 += 1
           elsif counter_2 == this_encounters_monsters.length - 1
-          print " and a #{monster_object.name}."
+          print pastel.red.bold(" and a #{monster_object.name}.")
           puts ""
           else
-          print " a #{monster_object.name},"
+          print pastel.red.bold(" a #{monster_object.name},")
           counter_2 += 1
           end
         end
