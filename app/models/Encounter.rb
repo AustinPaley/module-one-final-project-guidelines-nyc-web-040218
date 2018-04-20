@@ -102,7 +102,7 @@ class Encounter < ActiveRecord::Base
             puts ""
             counter += 1
             else
-            print pastel.red.bold("and a #{monster_object.name}.")
+            print pastel.red.bold(" and a #{monster_object.name}.")
             end
           end
         puts ""
@@ -247,7 +247,7 @@ class Encounter < ActiveRecord::Base
             print pastel.red.bold("As you're traveling through the desert, you suddenly encounter a #{monster_object.name}")
             counter += 1
             else
-            print pastel.red.bold("and a #{monster_object.name}.")
+            print pastel.red.bold(" and a #{monster_object.name}.")
             end
           end
           puts ""
@@ -392,7 +392,7 @@ class Encounter < ActiveRecord::Base
             print pastel.red.bold("As you're traveling through the forest, you suddenly encounter a #{monster_object.name}")
             counter += 1
             else
-            print pastel.red.bold("and a #{monster_object.name}.")
+            print pastel.red.bold(" and a #{monster_object.name}.")
             end
           end
           puts ""
@@ -537,7 +537,7 @@ class Encounter < ActiveRecord::Base
             print pastel.red.bold("As you're traveling through the deep woods, you suddenly encounter a #{monster_object.name}")
             counter += 1
             else
-            print pastel.red.bold("and a #{monster_object.name}.")
+            print pastel.red.bold(" and a #{monster_object.name}.")
             end
           end
           puts ""
@@ -682,7 +682,7 @@ class Encounter < ActiveRecord::Base
             print pastel.red.bold("As you're traveling through a cave, you suddenly encounter a #{monster_object.name}")
             counter += 1
             else
-            print pastel.red.bold("and a #{monster_object.name}.")
+            print pastel.red.bold(" and a #{monster_object.name}.")
             end
           end
           puts ""
@@ -972,7 +972,7 @@ class Encounter < ActiveRecord::Base
             print pastel.red.bold("As you're exploring the fortress, you suddenly encounter a #{monster_object.name}")
             counter += 1
             else
-            print pastel.red.bold("and a #{monster_object.name}.")
+            print pastel.red.bold(" and a #{monster_object.name}.")
             end
           end
           puts ""
@@ -1117,7 +1117,7 @@ class Encounter < ActiveRecord::Base
             print pastel.red.bold("As you're traveling through a field, you suddenly encounter a #{monster_object.name}")
             counter += 1
             else
-            print pastel.red.bold("and a #{monster_object.name}.")
+            print pastel.red.bold(" and a #{monster_object.name}.")
             end
           end
           puts ""
@@ -1262,7 +1262,7 @@ class Encounter < ActiveRecord::Base
             print pastel.red.bold("As you're exploring the volcano, you suddenly encounter a #{monster_object.name}")
             counter += 1
             else
-            print pastel.red.bold("and a #{monster_object.name}.")
+            print pastel.red.bold(" and a #{monster_object.name}.")
             end
           end
           puts ""
@@ -1407,7 +1407,7 @@ class Encounter < ActiveRecord::Base
             print pastel.red.bold("After being misidentified as a band of criminals, your party finds itself in a dungeon reserved for the most terrible creatures in the land. Soon after arriving, a large fire accidentally breaks out, giving the party a window of opportunity to escape. However, in order to get out of the prison alive, the party has to successfully defeat a #{monster_object.name}")
             counter += 1
             else
-            print pastel.red.bold("and a #{monster_object.name}.")
+            print pastel.red.bold(" and a #{monster_object.name}.")
             end
           end
           puts ""
@@ -1552,7 +1552,7 @@ class Encounter < ActiveRecord::Base
             print pastel.red.bold("After a long journey your party comes upon some old ruins in a forest. Settling down to make camp for the night, you soon realize that your party is not alone. Before you can fully prepare, you are set upon by a #{monster_object.name}")
             counter += 1
             else
-            print pastel.red.bold("and a #{monster_object.name}.")
+            print pastel.red.bold(" and a #{monster_object.name}.")
             end
           end
           puts ""
