@@ -94,10 +94,10 @@ def run
         puts "By Type"
         puts "By Name"
         input4 = gets.chomp
-        if input4.downcase == "by type"
+        if input4.downcase == "by type" || input4.downcase == "type"
           Equipment.types_catalog
           break
-        elsif input4.downcase == "by name"
+        elsif input4.downcase == "by name" || input4.downcase == "name"
           puts "What is the name of the item?"
           item = gets.chomp
         # puts "What is the item's category (optional)?"
