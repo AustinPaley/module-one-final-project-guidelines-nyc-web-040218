@@ -137,6 +137,15 @@ class Equipment < ActiveRecord::Base
         item.name.downcase == name.downcase
       end
       item_requested.map do |req_item|
+        # binding.pry
+        quant = req_item["value"]
+        # binding.pry
+        d = "{\"quantity\"=>"
+        a = quant.gsub('{\"quantity\"=>', "")
+        b = a.gsub(', \"unit\"=>\"', "")
+        c = b.gsub('\"}', "")
+        binding.pry
+        shorter_string = short.to_s
         puts ""
         puts "==========="
         puts ""
