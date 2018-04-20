@@ -1,7 +1,7 @@
 class Equipment < ActiveRecord::Base
-belongs_to :encounters
+  belongs_to :encounters
 
-### EQUIPMENT TYPE ENCYCLOPEDIA ###
+  ### EQUIPMENT TYPE ENCYCLOPEDIA ###
 
   def self.types_catalog
     puts "Choose an equipment type: Weapon, Armor, Adventuring Gear, Tools, or Mounts and Vehicles"
@@ -28,9 +28,9 @@ belongs_to :encounters
     end
   end
 
-### END EQUIPMENT TYPE ENCYCLOPEDIA ###
+  ### END EQUIPMENT TYPE ENCYCLOPEDIA ###
 
-### HELPER METHODS ###
+  ### HELPER METHODS ###
 
   def self.weapons_catalog
     weapons = Equipment.all.select do |equipment_obj|
@@ -132,36 +132,22 @@ belongs_to :encounters
     end
   end
 
-  def self.find_item(name, category = false)
-    if category.is_a?(String) && category != ""
-      cat_format = category.tr(' ', '_').downcase
-      if cat_format == "weapons"
-        Equipment.weapons.select do |item|
-          item.name.downcase == name.downcase
-        end
-      elsif cat_format == "armor"
-        Equipment.armor.select do |item|
-          item.name.downcase == name.downcase
-        end
-      elsif cat_format == "adventuring_gear"
-        Equipment.adventuring_gear.select do |item|
-          item.name.downcase == name.downcase
-        end
-      elsif cat_format == "tools"
-        Equipment.tools.select do |item|
-          item.name.downcase == name.downcase
-        end
-      elsif cat_format == "mounts_and_vehicles"
-        Equipment.mounts_and_vehicles.select do |item|
-          item.name.downcase == name.downcase
-        end
-      end
-    else
-      Equipment.all.select do |item|
+  def self.find_item(name)
+      item_requested = Equipment.all.select do |item|
         item.name.downcase == name.downcase
       end
+      item_requested.map do |req_item|
+        puts ""
+        puts "==========="
+        puts ""
+        puts "Item Name: #{req_item.name}"
+        puts "Equipment Type: #{req_item.category}"
+        puts "Weapon Value: #{req_item.value}"
+        puts ""
+        puts "==========="
+      end
     end
-  end
+
 
   def self.random_item
     Equipment.all.sample
@@ -237,6 +223,5 @@ belongs_to :encounters
     end
   end
 
-### END HELPER METHODS ###
-
 end
+### END HELPER METHODS ###
