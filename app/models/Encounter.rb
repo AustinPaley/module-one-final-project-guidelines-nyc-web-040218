@@ -536,7 +536,7 @@ class Encounter < ActiveRecord::Base
             puts ""
             print pastel.red.bold("As you're traveling through the deep woods, you suddenly encounter a #{monster_object.name}")
             counter += 1
-            else
+          else   # => I DONT UNDERSTAND WHY "AND" (FROM BELOW) ISNT APPEARING IN THE STRING
             print pastel.red.bold(" and a #{monster_object.name}.")
             end
           end

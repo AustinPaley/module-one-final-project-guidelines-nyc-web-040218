@@ -137,12 +137,19 @@ class Equipment < ActiveRecord::Base
         item.name.downcase == name.downcase
       end
       item_requested.map do |req_item|
+        a = req_item["value"]
+        b = a.gsub('\\', "")
+        c = b.gsub('{"quantity"=>"','')
+        d = c.gsub('  ", "unit"=>"" . ', '')
+        e = d.gsub('  ""', '')
+        f = e.gsub('}', "")
+        shorter_value_string = f.gsub('   ','')
         puts ""
         puts "==========="
         puts ""
         puts "Item Name: #{req_item.name}"
         puts "Equipment Type: #{req_item.category}"
-        puts "Weapon Value: #{req_item.value}"
+        puts "Weapon Value: #{shorter_value_string}"
         puts ""
         puts "==========="
       end
